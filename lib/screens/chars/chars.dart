@@ -14,7 +14,7 @@ class Chars extends StatelessWidget {
           // horizontal, this produces 2 rows.
           crossAxisCount: 2,
           // Generate 100 widgets that display their index in the List.
-          children: List.generate(100, (index) {
+          children: List.generate(20, (index) {
             return Center(
               child: Text(
                 'Item $index',
