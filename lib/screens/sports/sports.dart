@@ -1,48 +1,51 @@
 import 'package:flutter/material.dart';
 
-/// The base class for the different types of items the list can contain.
-abstract class ListItem {
-  /// The title line to show in a list item.
-  Widget buildTitle(BuildContext context);
-
-  /// The subtitle line, if any, to show in a list item.
-  Widget buildSubtitle(BuildContext context);
-}
-
-/// A ListItem that contains data to display a heading.
-class HeadingItem implements ListItem {
-  final String heading;
-
-  HeadingItem(this.heading);
+class SportsList extends StatelessWidget {
+  const SportsList({Key? key}) : super(key: key);
 
   @override
-  Widget buildTitle(BuildContext context) {
-    return Text(
-      heading,
-      style: Theme.of(context).textTheme.headline5,
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              color: Colors.amber,
+              child: const Center(
+                child: Text('Above'),
+              ),
+            ),
+          ),
+          const Divider(
+            height: 20,
+            thickness: 5,
+            indent: 20,
+            endIndent: 0,
+            color: Colors.black,
+          ),
+          // Subheader example from Material spec.
+          // https://material.io/components/dividers#types
+          Container(
+            padding: const EdgeInsets.only(left: 20),
+            child: Align(
+              alignment: AlignmentDirectional.centerStart,
+              child: Text(
+                'Subheader',
+                style: Theme.of(context).textTheme.caption,
+                textAlign: TextAlign.start,
+              ),
+            ),
+          ),
+          Expanded(
+            child: Container(
+              color: Theme.of(context).colorScheme.primary,
+              child: const Center(
+                child: Text('Below'),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
-
-  @override
-  Widget buildSubtitle(BuildContext context) => const SizedBox.shrink();
 }
-
-/// A ListItem that contains data to display a message.
-class MessageItem implements ListItem {
-  final String sender;
-  final String body;
-
-  MessageItem(this.sender, this.body);
-
-  @override
-  Widget buildTitle(BuildContext context) => Text(sender);
-
-  @override
-  Widget buildSubtitle(BuildContext context) => Text(body);
-}
-final items = List<ListItem>.generate(
-  1000,
-  (i) => i % 6 == 0
-      ? HeadingItem('Heading $i')
-      : MessageItem('Sender $i', 'Message body $i'),
-);
