@@ -1,50 +1,191 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import './sportsData.dart';
 
-class SportSteps extends StatefulWidget {
-  const SportSteps({Key? key}) : super(key: key);
-
-  @override
-  State<SportSteps> createState() => _SportStepsState();
-}
-
-class _SportStepsState extends State<SportSteps> {
-  int _index = 0;
-
+class Dashboard extends StatelessWidget {
+  var sportData = SportData.getData;
   @override
   Widget build(BuildContext context) {
-    return Stepper(
-      currentStep: _index,
-      onStepCancel: () {
-        if (_index > 0) {
-          setState(() {
-            _index -= 1;
-          });
-        }
-      },
-      onStepContinue: () {
-        if (_index <= 0) {
-          setState(() {
-            _index += 1;
-          });
-        }
-      },
-      onStepTapped: (int index) {
-        setState(() {
-          _index = index;
-        });
-      },
-      steps: <Step>[
-        Step(
-          title: const Text('Step 1 title'),
-          content: Container(
-              alignment: Alignment.centerLeft,
-              child: const Text('Content for Step 1')),
+    return MaterialApp(
+        home: Scaffold(
+            body: Container(
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Expanded(
+            child: ListView.builder(
+// scrollDirection: Axis.horizontal,
+                itemCount: sportData.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                    height: 220,
+                    width: double.maxFinite,
+                    child: Card(
+                      elevation: 5,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border(
+                              top: BorderSide(
+                            width: 2.0,
+                            color: Colors.grey,
+                          )),
+                          color: Colors.white,
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(7),
+                          child: Stack(children: <Widget>[
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: Stack(
+                                children: <Widget>[
+                                  Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 10, top: 5),
+                                      child: Column(
+                                        children: <Widget>[
+                                          Row(
+                                            children: <Widget>[
+                                              cryptoIcon(sportData[index]),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              cryptoNameSymbol(
+                                                  sportData[index]),
+                                              Spacer(),
+                                              cryptoChange(sportData[index]),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              changeIcon(sportData[index]),
+                                              SizedBox(
+                                                width: 20,
+                                              )
+                                            ],
+                                          ),
+                                          Row(
+                                            children: <Widget>[
+                                              cryptoAmount(sportData[index])
+                                            ],
+                                          )
+                                        ],
+                                      ))
+                                ],
+                              ),
+                            )
+                          ]),
+                        ),
+                      ),
+                    ),
+                  );
+                }),
+          ),
+        ],
+      ),
+    )));
+  }
+
+  Widget cryptoIcon(data) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 15.0),
+      child: Align(
+          alignment: Alignment.centerLeft,
+          child: Icon(
+            data['icon'],
+            color: data['iconColor'],
+            size: 40,
+          )),
+    );
+  }
+
+  Widget cryptoNameSymbol(data) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: RichText(
+        text: TextSpan(
+          text: '${data['name']}',
+          style: TextStyle(
+              fontWeight: FontWeight.bold, color: Colors.black, fontSize: 20),
+          children: <TextSpan>[
+            TextSpan(
+                text: '\n${data['symbol']}',
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold)),
+          ],
         ),
-        const Step(
-          title: Text('Step 2 title'),
-          content: Text('Content for Step 2'),
+      ),
+    );
+  }
+
+  Widget cryptoChange(data) {
+    return Align(
+      alignment: Alignment.topRight,
+      child: RichText(
+        text: TextSpan(
+          text: '${data['change']}',
+          style: TextStyle(
+              fontWeight: FontWeight.bold, color: Colors.green, fontSize: 20),
+          children: <TextSpan>[
+            TextSpan(
+                text: '\n${data['changeValue']}',
+                style: TextStyle(
+                    color: data['changeColor'],
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold)),
+          ],
         ),
-      ],
+      ),
+    );
+  }
+
+  Widget changeIcon(data) {
+    return Align(
+        alignment: Alignment.topRight,
+        child: data['change'].contains('-')
+            ? Icon(
+                Icons.arrow_drop_up_rounded,
+                color: data['changeColor'],
+                size: 30,
+              )
+            : Icon(
+                Icons.arrow_downward_sharp,
+                color: data['changeColor'],
+                size: 30,
+              ));
+  }
+
+  Widget cryptoAmount(data) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 20.0),
+        child: Row(
+          children: <Widget>[
+            RichText(
+              textAlign: TextAlign.left,
+              text: TextSpan(
+                text: '\n${data['value']}',
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 35,
+                ),
+                children: <TextSpan>[
+                  TextSpan(
+                      text: '\n0.1349',
+                      style: TextStyle(
+                          color: Colors.grey,
+                          fontStyle: FontStyle.italic,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold)),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

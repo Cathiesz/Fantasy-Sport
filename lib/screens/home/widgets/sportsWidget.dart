@@ -8,7 +8,7 @@ class SportCard extends StatelessWidget {
     return Center(
       child: Card(
         child: InkWell(
-          splashColor: Colors.blue.withAlpha(30),
+          splashColor: Colors.green.withAlpha(30),
           onTap: () {
             debugPrint('Card tapped.');
           },

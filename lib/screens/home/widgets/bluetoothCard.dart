@@ -11,9 +11,9 @@ class BluetoothCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             const ListTile(
-              leading: Icon(Icons.album),
+              leading: Icon(Icons.bluetooth_connected_rounded),
               title: Text('Bluetooth Connection'),
-              subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
+              subtitle: Text('Your bluetooth device is connected'),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import '../chars/chars.dart';
+import './widgets/bluetoothCard.dart';
+import './widgets/sportsWidget.dart';
+import '../sports/sports.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -27,28 +30,32 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           controller: _tabController,
           tabs: const <Widget>[
             Tab(
-              icon: Icon(Icons.cloud_outlined),
+              icon: Icon(Icons.person),
             ),
             Tab(
-              icon: Icon(Icons.beach_access_sharp),
+              icon: Icon(Icons.home_rounded),
             ),
             Tab(
-              icon: Icon(Icons.brightness_5_sharp),
+              icon: Icon(Icons.directions_run_sharp),
             ),
           ],
         ),
       ),
       body: TabBarView(
         controller: _tabController,
-        children: const <Widget>[
+        children: <Widget>[
           Center(
             child: Chars(),
           ),
           Center(
-            child: Text("It's rainy here"),
-          ),
+              child: new Column(
+            children: [
+              new BluetoothCard(),
+              new SportCard(),
+            ],
+          )),
           Center(
-            child: Text("It's sunny here"),
+            child: SportsList(),
           ),
         ],
       ),
