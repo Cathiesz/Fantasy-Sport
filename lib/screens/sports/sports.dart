@@ -25,7 +25,7 @@ class SportsList extends StatelessWidget {
                     child: Card(
                       elevation: 5,
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           border: Border(
                               top: BorderSide(
                             width: 2.0,
@@ -47,18 +47,16 @@ class SportsList extends StatelessWidget {
                                         children: <Widget>[
                                           Row(
                                             children: <Widget>[
-                                              sportIcon(sportData[index]),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 10,
                                               ),
                                               sportNameSymbol(sportData[index]),
-                                              Spacer(),
+                                              const Spacer(),
                                               sportChange(sportData[index]),
-                                              SizedBox(
+                                              const SizedBox(
                                                 width: 10,
                                               ),
-                                              changeIcon(sportData[index]),
-                                              SizedBox(
+                                              const SizedBox(
                                                 width: 20,
                                               )
                                             ],
@@ -83,19 +81,6 @@ class SportsList extends StatelessWidget {
         ],
       ),
     )));
-  }
-
-  Widget sportIcon(data) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 15.0),
-      child: Align(
-          alignment: Alignment.centerLeft,
-          child: Icon(
-            data['icon'],
-            color: data['iconColor'],
-            size: 40,
-          )),
-    );
   }
 
   Widget sportNameSymbol(data) {
@@ -138,22 +123,6 @@ class SportsList extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Widget changeIcon(data) {
-    return Align(
-        alignment: Alignment.topRight,
-        child: data['change'].contains('-')
-            ? Icon(
-                Icons.arrow_drop_up_rounded,
-                color: data['changeColor'],
-                size: 30,
-              )
-            : Icon(
-                Icons.arrow_downward_sharp,
-                color: data['changeColor'],
-                size: 30,
-              ));
   }
 
   Widget sportAmount(data) {

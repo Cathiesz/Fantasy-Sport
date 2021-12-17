@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import './screens/home/home.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const FantasySport());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class FantasySport extends StatelessWidget {
+  const FantasySport({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-     // title: 'Fantasy Sport',
+      // title: 'Fantasy Sport',
       theme: ThemeData(primarySwatch: Colors.lightGreen),
       home: const HomeScreen(),
     );
