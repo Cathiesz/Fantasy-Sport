@@ -348,3 +348,13 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+dart_tool/
+
+.dart_tool/
+
+build/
+
+.flutter_plugins_dependencies
+
+.flutter_plugins

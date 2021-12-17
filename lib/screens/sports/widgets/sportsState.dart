@@ -47,14 +47,13 @@ class Dashboard extends StatelessWidget {
                                         children: <Widget>[
                                           Row(
                                             children: <Widget>[
-                                              cryptoIcon(sportData[index]),
+                                              sportIcon(sportData[index]),
                                               SizedBox(
                                                 height: 10,
                                               ),
-                                              cryptoNameSymbol(
-                                                  sportData[index]),
+                                              sportNameSymbol(sportData[index]),
                                               Spacer(),
-                                              cryptoChange(sportData[index]),
+                                              sportChange(sportData[index]),
                                               SizedBox(
                                                 width: 10,
                                               ),
@@ -66,7 +65,7 @@ class Dashboard extends StatelessWidget {
                                           ),
                                           Row(
                                             children: <Widget>[
-                                              cryptoAmount(sportData[index])
+                                              sportAmount(sportData[index])
                                             ],
                                           )
                                         ],
@@ -86,7 +85,7 @@ class Dashboard extends StatelessWidget {
     )));
   }
 
-  Widget cryptoIcon(data) {
+  Widget sportIcon(data) {
     return Padding(
       padding: const EdgeInsets.only(left: 15.0),
       child: Align(
@@ -99,7 +98,7 @@ class Dashboard extends StatelessWidget {
     );
   }
 
-  Widget cryptoNameSymbol(data) {
+  Widget sportNameSymbol(data) {
     return Align(
       alignment: Alignment.centerLeft,
       child: RichText(
@@ -120,7 +119,7 @@ class Dashboard extends StatelessWidget {
     );
   }
 
-  Widget cryptoChange(data) {
+  Widget sportChange(data) {
     return Align(
       alignment: Alignment.topRight,
       child: RichText(
@@ -157,7 +156,7 @@ class Dashboard extends StatelessWidget {
               ));
   }
 
-  Widget cryptoAmount(data) {
+  Widget sportAmount(data) {
     return Align(
       alignment: Alignment.centerLeft,
       child: Padding(

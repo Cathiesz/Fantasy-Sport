@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../chars/chars.dart';
-import './widgets/bluetoothCard.dart';
-import './widgets/sportsWidget.dart';
+import 'widgets/bluetooth_card.dart';
+import 'widgets/sports_widget.dart';
 import '../sports/sports.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Fantasy Sport'),
+        // title: const Text('Fantasy Sport'),
         bottom: TabBar(
           controller: _tabController,
           tabs: const <Widget>[
