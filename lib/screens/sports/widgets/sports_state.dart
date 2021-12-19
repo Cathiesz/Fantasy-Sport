@@ -1,31 +1,42 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hello_world/screens/sports/progress/progress.dart';
 import 'sports_data.dart';
 
 class Dashboard extends StatelessWidget {
   var sportData = SportData.getData;
+
+  Dashboard({Key? key}) : super(key: key);
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-            body: Container(
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Expanded(
-            child: ListView.builder(
+            body: Column(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Expanded(
+          child: ListView.builder(
 // scrollDirection: Axis.horizontal,
-                itemCount: sportData.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                    height: 220,
-                    width: double.maxFinite,
-                    child: Card(
-                      elevation: 5,
+              itemCount: sportData.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                  height: 220,
+                  width: double.maxFinite,
+                  child: Card(
+                    elevation: 5,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProgressWidget()),
+                        );
+                      },
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           border: Border(
                               top: BorderSide(
                             width: 2.0,
@@ -34,7 +45,7 @@ class Dashboard extends StatelessWidget {
                           color: Colors.white,
                         ),
                         child: Padding(
-                          padding: EdgeInsets.all(7),
+                          padding: const EdgeInsets.all(7),
                           child: Stack(children: <Widget>[
                             Align(
                               alignment: Alignment.centerRight,
@@ -77,11 +88,11 @@ class Dashboard extends StatelessWidget {
                         ),
                       ),
                     ),
-                  );
-                }),
-          ),
-        ],
-      ),
+                  ),
+                );
+              }),
+        ),
+      ],
     )));
   }
 
