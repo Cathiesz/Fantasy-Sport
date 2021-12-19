@@ -30,6 +30,8 @@ dependencies:
   flutter:
     sdk: flutter
   flame: 1.0.0
+  spritewidget: 0.9.24
+  esense_flutter: 0.4.3
   dashbook: ^0.1.5
 
   # The following adds the Cupertino Icons font to your application.

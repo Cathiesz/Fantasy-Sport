@@ -62,6 +62,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "esense_flutter",
+      "rootUri": "file:///C:/Users/K-Bie/Desktop/flutter_windows_2.5.3-stable/flutter/.pub-cache/hosted/pub.dartlang.org/esense_flutter-0.4.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "fake_async",
       "rootUri": "file:///C:/Users/K-Bie/Desktop/flutter_windows_2.5.3-stable/flutter/.pub-cache/hosted/pub.dartlang.org/fake_async-1.2.0",
       "packageUri": "lib/",
@@ -296,6 +302,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "spritewidget",
+      "rootUri": "file:///C:/Users/K-Bie/Desktop/flutter_windows_2.5.3-stable/flutter/.pub-cache/hosted/pub.dartlang.org/spritewidget-0.9.24",
+      "packageUri": "lib/",
+      "languageVersion": "2.2"
+    },
+    {
       "name": "stack_trace",
       "rootUri": "file:///C:/Users/K-Bie/Desktop/flutter_windows_2.5.3-stable/flutter/.pub-cache/hosted/pub.dartlang.org/stack_trace-1.10.0",
       "packageUri": "lib/",
@@ -410,7 +422,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-12-17T14:29:53.693707Z",
+  "generated": "2021-12-18T18:22:51.504286Z",
   "generator": "pub",
   "generatorVersion": "2.14.4"
 }

@@ -3,6 +3,7 @@ import '../chars/chars.dart';
 import 'widgets/bluetooth_card.dart';
 import 'widgets/sports_widget.dart';
 import '../sports/sports.dart';
+import './widgets/char_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -43,14 +44,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       body: TabBarView(
         controller: _tabController,
         children: <Widget>[
-          Center(
-            child: Chars(),
+          const Center(
+            child: CharsList(),
           ),
           Center(
-              child: new Column(
-            children: [
-              new BluetoothCard(),
-              new SportCard(),
+              child: Column(
+            children: const [
+              BluetoothCard(),
+              SportCard(),
+              CharacterShown(),
             ],
           )),
           Center(

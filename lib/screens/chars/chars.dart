@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Chars extends StatelessWidget {
-  const Chars({Key? key}) : super(key: key);
+class CharsList extends StatelessWidget {
+  const CharsList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +15,16 @@ class Chars extends StatelessWidget {
           crossAxisCount: 2,
           // Generate 100 widgets that display their index in the List.
           children: List.generate(20, (index) {
-            return Center(
-              child: Text(
-                'Item $index',
-                style: Theme.of(context).textTheme.headline5,
+            return Card(
+              child: InkWell(
+                splashColor: Colors.green.withAlpha(30),
+                onTap: () {
+                  debugPrint('Card tapped.');
+                },
+                child: Text(
+                  'Item $index',
+                  style: Theme.of(context).textTheme.headline5,
+                ),
               ),
             );
           }),

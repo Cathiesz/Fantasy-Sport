@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import './sportsData.dart';
+import 'sports_data.dart';
 
 class Dashboard extends StatelessWidget {
   var sportData = SportData.getData;
