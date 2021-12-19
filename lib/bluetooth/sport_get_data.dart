@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class SportGetData {
-  var today;
-  var thisWeek;
-  var record;
+  var today = 0;
+  var thisWeek = 0;
+  var record = 0;
 
   getToday() {
     return this.today;

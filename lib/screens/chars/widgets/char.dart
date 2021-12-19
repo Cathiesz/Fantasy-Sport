@@ -1,8 +1,8 @@
+import 'dart:ui' as ui show Image;
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:spritewidget/spritewidget.dart';
-import 'dart:ui' as ui show Image;
-import 'dart:async';
 
 class Character extends StatefulWidget {
   const Character({Key? key}) : super(key: key);

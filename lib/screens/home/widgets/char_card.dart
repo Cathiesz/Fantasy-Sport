@@ -13,8 +13,6 @@ class CharacterShown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final key = new GlobalKey<ScaffoldState>();
-    return Card(
-      child: Character(),
-    );
+    return Center(child: Card());
   }
 }

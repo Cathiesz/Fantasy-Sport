@@ -49,9 +49,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           ),
           Center(
               child: Column(
-            children: const [
+            children: [
               BluetoothCard(),
-              SportCard(),
+              SportsWidget(),
               CharacterShown(),
             ],
           )),

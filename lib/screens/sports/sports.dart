@@ -4,6 +4,9 @@ import 'widgets/sports_data.dart';
 
 class SportsList extends StatelessWidget {
   var sportData = SportData.getData;
+
+  SportsList({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,10 +18,9 @@ class SportsList extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: ListView.builder(
-// scrollDirection: Axis.horizontal,
                 itemCount: sportData.length,
                 itemBuilder: (context, index) {
-                  return createContainer(sportData[index]);
+                  return createContainer(index);
                 }),
           ),
         ],
@@ -26,7 +28,7 @@ class SportsList extends StatelessWidget {
     )));
   }
 
-  Container createContainer(data) {
+  createContainer(index) {
     return Container(
       padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
       height: 220,
@@ -58,9 +60,9 @@ class SportsList extends StatelessWidget {
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                sportNameSymbol(data),
+                                sportNameSymbol(sportData[index]),
                                 const Spacer(),
-                                sportChange(data),
+                                sportChange(sportData[index]),
                                 const SizedBox(
                                   width: 10,
                                 ),
@@ -70,7 +72,7 @@ class SportsList extends StatelessWidget {
                               ],
                             ),
                             Row(
-                              children: <Widget>[sportAmount(data)],
+                              children: <Widget>[sportAmount(sportData[index])],
                             )
                           ],
                         ))
