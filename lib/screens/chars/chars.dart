@@ -17,15 +17,12 @@ class CharsList extends StatelessWidget {
           children: List.generate(20, (index) {
             return Card(
               child: InkWell(
-                splashColor: Colors.green.withAlpha(30),
-                onTap: () {
-                  debugPrint('Card tapped.');
-                },
-                child: Text(
-                  'Item $index',
-                  style: Theme.of(context).textTheme.headline5,
-                ),
-              ),
+                  splashColor: Colors.green.withAlpha(30),
+                  onTap: () {
+                    debugPrint('Card tapped.');
+                  },
+                  child: Image.network('assets/images/first.gif',
+                      width: 200, height: 96)),
             );
           }),
         )));

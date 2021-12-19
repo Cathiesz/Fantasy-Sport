@@ -7,7 +7,7 @@ class Dashboard extends StatelessWidget {
   var sportData = SportData.getData;
 
   Dashboard({Key? key}) : super(key: key);
-  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -137,7 +137,9 @@ class Dashboard extends StatelessWidget {
         text: TextSpan(
           text: '${data['change']}',
           style: TextStyle(
-              fontWeight: FontWeight.bold, color: Colors.green, fontSize: 20),
+              fontWeight: FontWeight.bold,
+              color: Colors.lightGreen,
+              fontSize: 20),
           children: <TextSpan>[
             TextSpan(
                 text: '\n${data['changeValue']}',

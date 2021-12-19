@@ -22,7 +22,7 @@ class SportsWidget extends StatelessWidget {
             border: Border(
                 top: BorderSide(
               width: 2.0,
-              color: Colors.green,
+              color: Colors.lightGreen,
             )),
             color: Colors.white,
           ),
@@ -80,7 +80,7 @@ class SportsWidget extends StatelessWidget {
             TextSpan(
                 text: '\n${data['symbol']}',
                 style: TextStyle(
-                    color: Colors.green,
+                    color: Colors.lightGreen,
                     fontSize: 15,
                     fontWeight: FontWeight.bold)),
           ],
@@ -96,7 +96,9 @@ class SportsWidget extends StatelessWidget {
         text: TextSpan(
           text: 'Your Record: ${data['Record']}',
           style: TextStyle(
-              fontWeight: FontWeight.bold, color: Colors.green, fontSize: 15),
+              fontWeight: FontWeight.bold,
+              color: Colors.lightGreen,
+              fontSize: 15),
         ),
       ),
     );
@@ -114,7 +116,7 @@ class SportsWidget extends StatelessWidget {
               text: TextSpan(
                 text: '\n Today: ${data['Today']}',
                 style: TextStyle(
-                  color: Colors.green,
+                  color: Colors.lightGreen,
                   fontSize: 20,
                 ),
                 children: <TextSpan>[
