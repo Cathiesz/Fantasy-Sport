@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import '../chars/chars.dart';
-import 'widgets/bluetooth_card.dart';
-import 'widgets/sports_widget.dart';
 import '../sports/sports.dart';
-import './widgets/char_card.dart';
+import 'widgets/home_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -12,53 +10,49 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-/// AnimationControllers can be created with `vsync: this` because of TickerProviderStateMixin.
-class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  late TabController _tabController;
+class _HomeScreenState extends State<HomeScreen> {
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static final List<Widget> _widgetOptions = <Widget>[
+    Home(),
+    CharsList(),
+    SportsList(),
+  ];
 
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        bottom: TabBar(
-          controller: _tabController,
-          tabs: const <Widget>[
-            Tab(
-              icon: Icon(Icons.person),
-            ),
-            Tab(
-              icon: Icon(Icons.home_rounded),
-            ),
-            Tab(
-              icon: Icon(Icons.directions_run_sharp),
-            ),
-          ],
-        ),
+        title: const Text('Sport with Buddies'),
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: <Widget>[
-          const Center(
-            child: CharsList(),
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
-          Center(
-              child: Column(
-            children: [
-              BluetoothCard(),
-              SportsWidget(),
-              const CharacterShown(),
-            ],
-          )),
-          Center(
-            child: SportsList(),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Character Selection',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.directions_run_sharp),
+            label: 'Sports',
           ),
         ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.lightGreen[800],
+        onTap: _onItemTapped,
       ),
     );
   }

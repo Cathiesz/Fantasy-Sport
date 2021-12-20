@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './tooltip_char.dart';
 
 class CharacterShown extends StatelessWidget {
   const CharacterShown({Key? key}) : super(key: key);
@@ -6,10 +7,10 @@ class CharacterShown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: Column(
-      children: <Widget>[
-        Image.network('assets/images/first.gif', width: 80, height: 96)
-      ],
-    ));
+      child: MyTooltip(
+          message: 'message',
+          child:
+              Image.network('assets/images/first.gif', width: 80, height: 96)),
+    );
   }
 }
