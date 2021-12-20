@@ -6,7 +6,6 @@ class MyTooltip extends StatelessWidget {
 
   const MyTooltip({Key? key, required this.message, required this.child})
       : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final key = GlobalKey<State<Tooltip>>();

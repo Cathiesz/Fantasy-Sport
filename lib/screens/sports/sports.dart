@@ -9,9 +9,7 @@ class SportsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
-            body: Container(
+    return Container(
       child: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -25,7 +23,7 @@ class SportsList extends StatelessWidget {
           ),
         ],
       ),
-    )));
+    );
   }
 
   createContainer(index) {

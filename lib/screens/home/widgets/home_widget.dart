@@ -12,9 +12,9 @@ class Home extends StatelessWidget {
     return Container(
       child: Column(
         children: <Widget>[
+          CharacterShown(),
           const BluetoothCard(),
           SportsWidget(),
-          const CharacterShown(),
         ],
       ),
     );
