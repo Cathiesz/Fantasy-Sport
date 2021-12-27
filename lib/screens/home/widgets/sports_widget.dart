@@ -1,131 +1,77 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../sports/widgets/sports_data.dart';
+import 'package:hello_world/bluetooth/sport_get_data.dart';
+
+Bluetooth bluetooth = Bluetooth();
 
 class SportsWidget extends StatelessWidget {
-  var sportData = SportData.getData;
-
-  SportsWidget({Key? key}) : super(key: key);
+  const SportsWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: Card(
-            child: Container(
-      padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-      height: 150,
-      width: double.maxFinite,
       child: Card(
-        elevation: 5,
-        child: Container(
-          decoration: const BoxDecoration(
-            border: Border(
-                top: BorderSide(
-              width: 2.0,
-              color: Colors.lightGreen,
-            )),
-            color: Colors.white,
-          ),
-          child: Padding(
-            padding: EdgeInsets.all(7),
-            child: Stack(children: <Widget>[
-              Align(
-                alignment: Alignment.centerRight,
-                child: Stack(
-                  children: <Widget>[
-                    Padding(
-                        padding: const EdgeInsets.only(left: 10, top: 5),
-                        child: Column(
-                          children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                sportNameSymbol(sportData[1]),
-                                const Spacer(),
-                                sportChange(sportData[1]),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                const SizedBox(
-                                  width: 20,
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: <Widget>[sportAmount(sportData[1])],
-                            )
-                          ],
-                        ))
-                  ],
-                ),
-              )
-            ]),
-          ),
-        ),
-      ),
-    )));
-  }
-
-  Widget sportNameSymbol(data) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: RichText(
-        text: TextSpan(
-          text: '${data['name']}',
-          style: TextStyle(
-              fontWeight: FontWeight.bold, color: Colors.black, fontSize: 25),
-          children: <TextSpan>[
-            TextSpan(
-                text: '\n${data['symbol']}',
-                style: TextStyle(
-                    color: Colors.lightGreen,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold)),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget sportChange(data) {
-    return Align(
-      alignment: Alignment.topRight,
-      child: RichText(
-        text: TextSpan(
-          text: 'Your Record: ${data['Record']}',
-          style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.lightGreen,
-              fontSize: 15),
-        ),
-      ),
-    );
-  }
-
-  Widget sportAmount(data) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: Padding(
-        padding: const EdgeInsets.only(left: 20.0),
-        child: Row(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            RichText(
-              textAlign: TextAlign.left,
-              text: TextSpan(
-                text: '\n Today: ${data['Today']}',
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Expanded(
+                  child: ListTile(
+                    leading: Icon(CupertinoIcons.flame),
+                    title: const Text('Highest Temperature Today',
+                        style:
+                            TextStyle(color: Colors.lightGreen, fontSize: 14)),
+                    subtitle: Text(bluetooth.getHighestTemp()),
+                  ),
+                ),
+                SizedBox(width: 8),
+                const SizedBox(
+                  height: 25,
+                  child: VerticalDivider(
+                    color: Colors.blueGrey,
+                    thickness: 1,
+                    indent: 2,
+                    endIndent: 0,
+                    width: 20,
+                  ),
+                ),
+                Expanded(
+                  child: ListTile(
+                    leading: Icon(CupertinoIcons.snow),
+                    title: const Text(
+                      'Lowest Temperature today',
+                      style: TextStyle(
+                        color: Colors.lightGreen,
+                      ),
+                    ),
+                    subtitle: Text(bluetooth.getLowestTemp()),
+                  ),
+                ),
+                SizedBox(width: 8),
+              ],
+            ),
+            const Divider(color: Colors.black),
+            ListTile(
+              title: const Text(
+                'Amount of Push Ups',
                 style: TextStyle(
                   color: Colors.lightGreen,
-                  fontSize: 20,
                 ),
-                children: <TextSpan>[
-                  TextSpan(
-                      text: '\n This Week: ${data['This Week']}',
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-                ],
               ),
+              subtitle: Text(bluetooth.getPushups()),
+            ),
+            const Divider(color: Colors.black),
+            ListTile(
+              leading: Icon(CupertinoIcons.arrow_2_circlepath_circle),
+              title: const Text(
+                'Amount of Spins',
+                style: TextStyle(
+                  color: Colors.lightGreen,
+                ),
+              ),
+              subtitle: Text(bluetooth.getSpins()),
             ),
           ],
         ),

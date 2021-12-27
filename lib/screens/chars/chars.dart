@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+String _shownImage = 'assets/images/first.gif';
+
 class CharsList extends StatelessWidget {
   const CharsList({Key? key}) : super(key: key);
 
@@ -17,7 +19,7 @@ class CharsList extends StatelessWidget {
           child: InkWell(
               splashColor: Colors.green.withAlpha(30),
               onTap: () {
-                debugPrint('Card tapped.');
+                _setImage('assets/images/first.gif');
               },
               child: Image.network('assets/images/first.gif',
                   width: 200, height: 96)),
@@ -25,4 +27,10 @@ class CharsList extends StatelessWidget {
       }),
     ));
   }
+
+  void _setImage(String image) {
+    _shownImage = image;
+  }
+
+  String getImage() {return _shownImage;}
 }

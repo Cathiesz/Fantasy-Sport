@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 
 class BluetoothCard extends StatelessWidget {
@@ -21,7 +24,9 @@ class BluetoothCard extends StatelessWidget {
               children: <Widget>[
                 TextButton(
                   child: const Text('Connect'),
-                  onPressed: () {/* ... */},
+                  onPressed: () {
+                    AppSettings.openBluetoothSettings();
+                  },
                 ),
                 const SizedBox(width: 8),
                 TextButton(

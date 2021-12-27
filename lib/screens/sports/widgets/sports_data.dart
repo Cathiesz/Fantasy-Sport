@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../bluetooth/sport_get_data.dart';
 
-SportGetData sport = new SportGetData();
+Bluetooth sport = new Bluetooth();
 
 class SportData {
   static final getData = [

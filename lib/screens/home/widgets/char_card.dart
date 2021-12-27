@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/screens/chars/chars.dart';
 import './tooltip_char.dart';
 import './tooltip_messages.dart';
 import 'dart:math';
@@ -6,6 +7,7 @@ import 'dart:math';
 final _random = new Random();
 
 class CharacterShown extends StatelessWidget {
+  CharsList char = CharsList();
   var tooltipmessage = TooltipMessages.getData;
 
   CharacterShown({Key? key}) : super(key: key);
@@ -15,8 +17,7 @@ class CharacterShown extends StatelessWidget {
     return Center(
       child: MyTooltip(
           message: '${tooltipmessage[1 + _random.nextInt(5 - 1)]['text']}',
-          child:
-              Image.network('assets/images/first.gif', width: 80, height: 96)),
+          child: Image.network(char.getImage(), width: 80, height: 96)),
     );
   }
 }

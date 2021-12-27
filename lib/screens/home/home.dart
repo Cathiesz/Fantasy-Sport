@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 import '../chars/chars.dart';
 import '../sports/sports.dart';
 import 'widgets/home_widget.dart';
