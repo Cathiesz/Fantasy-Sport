@@ -17,18 +17,33 @@ class CharsList extends StatelessWidget {
       crossAxisCount: 2,
       // Generate 100 widgets that display their index in the List.
       children: List.generate(6, (index) {
-        return Card(
-          child: InkWell(
-              splashColor: Colors.green.withAlpha(30),
-              onTap: () {
-                // ignore: unrelated_type_equality_checks
-                if (index == getData[index]) {
-                  _setImage('${getData[index]['file']}');
-                }
-              },
-              child: Image.network('${getData[index]['file']}',
-                  width: 200, height: 96)),
-        );
+        return Container(
+            margin: const EdgeInsets.only(top: 10.0),
+            height: 200,
+            child: Card(
+                semanticContainer: true,
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                child: InkWell(
+                    splashColor: Colors.green.withAlpha(30),
+                    onTap: () {
+                      // ignore: unrelated_type_equality_checks
+                      if (index == getData[index]) {
+                        _setImage('${getData[index]['file']}');
+                      }
+                    },
+                    child: Column(
+                      children: [
+                        Image.network('${getData[index]['file']}',
+                            width: MediaQuery.of(context).size.width,
+                            height: 96),
+                        Text('${getData[index]['name']}',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        Text(
+                          '\n ${getData[index]['story']}',
+                          style: TextStyle(color: Colors.grey),
+                        )
+                      ],
+                    ))));
       }),
     ));
   }

@@ -1,16 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hello_world/bluetooth/sport_get_data.dart';
+import 'package:hello_world/screens/chars/widgets/char_data.dart';
+import 'package:hello_world/screens/informations/info_screen.dart';
 
 Bluetooth bluetooth = Bluetooth();
+var getData = CharData.getData;
 
 class SportsWidget extends StatelessWidget {
   const SportsWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Card(
+    return Column(children: <Widget>[
+      Card(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
@@ -52,30 +55,37 @@ class SportsWidget extends StatelessWidget {
                 SizedBox(width: 8),
               ],
             ),
-            const Divider(color: Colors.black),
-            ListTile(
-              title: const Text(
-                'Amount of Push Ups',
-                style: TextStyle(
-                  color: Colors.lightGreen,
-                ),
-              ),
-              subtitle: Text(bluetooth.getPushups()),
-            ),
-            const Divider(color: Colors.black),
-            ListTile(
-              leading: Icon(CupertinoIcons.arrow_2_circlepath_circle),
-              title: const Text(
-                'Amount of Spins',
-                style: TextStyle(
-                  color: Colors.lightGreen,
-                ),
-              ),
-              subtitle: Text(bluetooth.getSpins()),
-            ),
           ],
         ),
       ),
-    );
+      Card(
+        child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+          InkWell(
+            splashColor: Colors.green.withAlpha(30),
+            onTap: () {
+              _navigateToNextScreen(context);
+            },
+            child: ListTile(
+              title: Text(
+                '${getData[1]['challenge-title']}',
+                style: TextStyle(
+                  color: Colors.lightGreen,
+                ),
+              ),
+              subtitle: Text(
+                  "\n\nCongratulations! You have accepted ${getData[1]['name']}'s chalenge! \nGood luck beating it! \n\n Your Record today is:" +
+                      bluetooth.getSpins() +
+                      "\n\n Your best score was:" +
+                      bluetooth.getRecord().toString()),
+            ),
+          )
+        ]),
+      )
+    ]);
   }
+}
+
+void _navigateToNextScreen(BuildContext context) {
+  Navigator.of(context)
+      .push(MaterialPageRoute(builder: (context) => InfoPage()));
 }
