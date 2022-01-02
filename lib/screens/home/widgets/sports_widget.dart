@@ -45,9 +45,7 @@ class SportsWidget extends StatelessWidget {
                     leading: Icon(CupertinoIcons.snow),
                     title: const Text(
                       'Lowest Temperature today',
-                      style: TextStyle(
-                        color: Colors.lightGreen,
-                      ),
+                      style: TextStyle(color: Colors.lightGreen, fontSize: 14),
                     ),
                     subtitle: Text(bluetooth.getLowestTemp()),
                   ),
@@ -66,18 +64,32 @@ class SportsWidget extends StatelessWidget {
               _navigateToNextScreen(context);
             },
             child: ListTile(
-              title: Text(
-                '${getData[1]['challenge-title']}',
-                style: TextStyle(
-                  color: Colors.lightGreen,
+                title: Text(
+                  '${getData[1]['challenge-title']}',
+                  style: TextStyle(
+                    color: Colors.lightGreen,
+                  ),
                 ),
-              ),
-              subtitle: Text(
-                  "\n\nCongratulations! You have accepted ${getData[1]['name']}'s chalenge! \nGood luck beating it! \n\n Your Record today is:" +
-                      bluetooth.getSpins() +
-                      "\n\n Your best score was:" +
-                      bluetooth.getRecord().toString()),
-            ),
+                subtitle: RichText(
+                  text: TextSpan(
+                    text:
+                        "\n\nCongratulations! You have accepted ${getData[1]['name']}'s chalenge! \nGood luck beating it! \n\n Your Record today is:",
+                    style: DefaultTextStyle.of(context).style,
+                    children: <TextSpan>[
+                      TextSpan(
+                          text: bluetooth.getSpins(),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.lightGreen)),
+                      TextSpan(text: "\n\n Your best score was: "),
+                      TextSpan(
+                          text: bluetooth.getRecord().toString(),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.lightGreen))
+                    ],
+                  ),
+                )),
           )
         ]),
       )
