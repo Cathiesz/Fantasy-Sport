@@ -17,7 +17,8 @@ class CharacterShown extends StatelessWidget {
     return Center(
       child: MyTooltip(
           message: '${tooltipmessage[1 + _random.nextInt(5 - 1)]['text']}',
-          child: Image.network(char.getImage(), width: 80, height: 96)),
+          child: Image.network(char.getImage(),
+              width: MediaQuery.of(context).size.width, height: 256)),
     );
   }
 }

@@ -1,21 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Bluetooth {
   var today = 0;
   var thisWeek = 0;
   var record = 0;
 
+  incrementToday() async {
+    if (1 == 0) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      today = (prefs.getInt('counter') ?? 0) + 1;
+      await prefs.setInt('counter', today);
+    } else {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      var week = 0;
+      await prefs.setInt('counter', week);
+    }
+  }
+
+  incrementWeek() async {
+    if (1 == 0) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      thisWeek = (prefs.getInt('counter') ?? 0) + 1;
+      await prefs.setInt('counter', thisWeek);
+    } else {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      var week = 0;
+      await prefs.setInt('counter', week);
+    }
+  }
+
+  incrementRecord() async {
+    if (today > record) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      record = (prefs.getInt('counter') ?? 0) + 1;
+      await prefs.setInt('counter', record);
+    }
+  }
+
   getToday() {
-    return this.today;
+    return today;
   }
 
   getThisWeek() {
-    return this.thisWeek;
+    return thisWeek;
   }
 
   getRecord() {
-    if (this.today >= this.record) {
-      this.record = this.today;
+    if (today >= record) {
+      record = today;
     }
     return 0;
   }
