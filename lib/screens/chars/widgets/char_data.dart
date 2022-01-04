@@ -2,11 +2,11 @@ class CharData {
   static final getData = [
     {
       "id": 1,
-      "name": "Sailory",
-      "title": "Sailory",
+      "name": "Matrosky",
+      "title": "Matrosky",
       "file": "assets/images/first.gif",
       "story":
-          "After years at the sea Sailory spends his time keeping his body fit. Join him an further wet adventures.",
+          "After years at the sea Matrosky spends his time keeping his body fit. Join him an further wet adventures.",
       "challenge-title": "Get your body to sweat!",
       "int-to-beat": 37,
     },
@@ -26,7 +26,7 @@ class CharData {
       "title": "Sailory",
       "file": "assets/images/third.gif",
       "story": "Biep bub Bieep",
-      "challenge-title": "Get to know your heartbeat",
+      "challenge-title": "Listen to your heartbeat for at least a minute!",
       "int-to-beat": 1.00,
     },
     {

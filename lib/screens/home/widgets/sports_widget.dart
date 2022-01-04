@@ -73,7 +73,7 @@ class SportsWidget extends StatelessWidget {
                 subtitle: RichText(
                   text: TextSpan(
                     text:
-                        "\n\nCongratulations! You have accepted ${getData[1]['name']}'s chalenge! \nGood luck beating it! \n\n Your Record today is:",
+                        "\n\nCongratulations! You have accepted ${getData[1]['name']}'s challenge! \nGood luck beating it! \n\n Your Record today is:",
                     style: DefaultTextStyle.of(context).style,
                     children: <TextSpan>[
                       TextSpan(

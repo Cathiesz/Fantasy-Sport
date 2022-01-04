@@ -8,17 +8,22 @@ final _random = new Random();
 
 class CharacterShown extends StatelessWidget {
   CharsList char = CharsList();
+  final ValueNotifier<String> _img = ValueNotifier("assets/images/second.gif");
   var tooltipmessage = TooltipMessages.getData;
 
   CharacterShown({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: MyTooltip(
-          message: '${tooltipmessage[1 + _random.nextInt(5 - 1)]['text']}',
-          child: Image.network(char.getImage(),
-              width: MediaQuery.of(context).size.width, height: 512)),
-    );
+    return ValueListenableBuilder<String>(
+        valueListenable: _img,
+        builder: (context, value, child) {
+          return Center(
+            child: MyTooltip(
+                message:
+                    '${tooltipmessage[1 + _random.nextInt(5 - 1)]['text']}',
+                child: Image.asset("assets/images/first.gif")),
+          );
+        });
   }
 }

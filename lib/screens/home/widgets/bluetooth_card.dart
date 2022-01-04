@@ -15,7 +15,8 @@ class BluetoothCard extends StatelessWidget {
           children: <Widget>[
             const ListTile(
               leading: Icon(Icons.bluetooth_connected_rounded),
-              title: Text('Bluetooth Connection'),
+              title: Text('Bluetooth Connection',
+                  style: TextStyle(color: Colors.lightGreen, fontSize: 14)),
               subtitle:
                   Text('Your bluetooth device is connected \nDevice Name:'),
             ),

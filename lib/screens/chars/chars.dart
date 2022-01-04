@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hello_world/screens/chars/widgets/char_data.dart';
 
@@ -5,8 +6,6 @@ var getData = CharData.getData;
 var _shownImage = "assets/images/first.gif";
 
 class CharsList extends StatelessWidget {
-  const CharsList({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     const title = ' Char List';
@@ -33,7 +32,7 @@ class CharsList extends StatelessWidget {
                     },
                     child: Column(
                       children: [
-                        Image.network('${getData[index]['file']}',
+                        Image.asset('${getData[index]['file']}',
                             width: MediaQuery.of(context).size.width,
                             height: 96),
                         Text('${getData[index]['name']}',
@@ -55,4 +54,6 @@ class CharsList extends StatelessWidget {
   String getImage() {
     return _shownImage;
   }
+
+  returnID() {}
 }
