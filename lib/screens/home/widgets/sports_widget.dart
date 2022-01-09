@@ -7,9 +7,14 @@ import 'package:hello_world/screens/informations/info_screen.dart';
 Bluetooth bluetooth = Bluetooth();
 var getData = CharData.getData;
 
-class SportsWidget extends StatelessWidget {
+class SportsWidget extends StatefulWidget {
   const SportsWidget({Key? key}) : super(key: key);
 
+  @override
+  _SportsWidgetState createState() => _SportsWidgetState();
+}
+
+class _SportsWidgetState extends State<SportsWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
@@ -64,32 +69,33 @@ class SportsWidget extends StatelessWidget {
               _navigateToNextScreen(context);
             },
             child: ListTile(
-                title: Text(
-                  '${getData[1]['challenge-title']}',
-                  style: TextStyle(
-                    color: Colors.lightGreen,
-                  ),
+              title: Text(
+                '${getData[1]['challenge-title']}',
+                style: TextStyle(
+                  color: Colors.lightGreen,
                 ),
-                subtitle: RichText(
-                  text: TextSpan(
-                    text:
-                        "\n\nCongratulations! You have accepted ${getData[1]['name']}'s challenge! \nGood luck beating it! \n\n Your Record today is:",
-                    style: DefaultTextStyle.of(context).style,
-                    children: <TextSpan>[
-                      TextSpan(
-                          text: bluetooth.getSpins(),
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.lightGreen)),
-                      TextSpan(text: "\n\n Your best score was: "),
-                      TextSpan(
-                          text: bluetooth.getRecord().toString(),
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.lightGreen))
-                    ],
-                  ),
-                )),
+              ),
+              subtitle: RichText(
+                text: TextSpan(
+                  text:
+                      "\n\nCongratulations! You have accepted ${getData[1]['name']}'s challenge! \nGood luck beating it! \n\n Your Record today is:",
+                  style: DefaultTextStyle.of(context).style,
+                  children: <TextSpan>[
+                    TextSpan(
+                        text: bluetooth.getSpins(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.lightGreen)),
+                    TextSpan(text: "\n\n Your best score was: "),
+                    TextSpan(
+                        text: bluetooth.getRecord().toString(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.lightGreen))
+                  ],
+                ),
+              ),
+            ),
           )
         ]),
       )

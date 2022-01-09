@@ -15,6 +15,7 @@ class _BluetoothState extends State<Bluetooth> {
   String _heartRate = "- bpm";
   String _bodyTemperature = '- °C';
   bool _isConnected = false;
+  String _deviceName = "";
 
   bool earConnectFound = false;
 
@@ -67,7 +68,7 @@ class _BluetoothState extends State<Bluetooth> {
     FlutterBlue flutterBlue = FlutterBlue.instance;
 
     // start scanning
-    flutterBlue.startScan(timeout: Duration(seconds: 4));
+    flutterBlue.startScan(timeout: const Duration(seconds: 4));
 
     // listen to scan results
     var subscription = flutterBlue.scanResults.listen((results) async {
@@ -84,6 +85,7 @@ class _BluetoothState extends State<Bluetooth> {
             setState(() {
               _isConnected = state == BluetoothDeviceState.connected;
               _connectionStatus = (_isConnected) ? "Connected" : "Disconnected";
+              _deviceName = r.device.name;
             });
           });
 
@@ -116,7 +118,7 @@ class _BluetoothState extends State<Bluetooth> {
                     0x34,
                     0x35
                   ]);
-                  await Future.delayed(new Duration(
+                  await Future.delayed(const Duration(
                       seconds:
                           2)); // short delay before next bluetooth operation otherwise BLE crashes
                   break;
@@ -125,7 +127,7 @@ class _BluetoothState extends State<Bluetooth> {
                   characteristic.value
                       .listen((rawData) => {updateHeartRate(rawData)});
                   await characteristic.setNotifyValue(true);
-                  await Future.delayed(new Duration(
+                  await Future.delayed(const Duration(
                       seconds:
                           2)); // short delay before next bluetooth operation otherwise BLE crashes
                   break;
@@ -134,7 +136,7 @@ class _BluetoothState extends State<Bluetooth> {
                   characteristic.value
                       .listen((rawData) => {updateBodyTemperature(rawData)});
                   await characteristic.setNotifyValue(true);
-                  await Future.delayed(new Duration(
+                  await Future.delayed(const Duration(
                       seconds:
                           2)); // short delay before next bluetooth operation otherwise BLE crashes
                   break;
@@ -146,6 +148,10 @@ class _BluetoothState extends State<Bluetooth> {
         }
       }
     });
+  }
+
+  String getName() {
+    return _deviceName;
   }
 
   @override

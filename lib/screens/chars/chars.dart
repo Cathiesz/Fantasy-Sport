@@ -1,11 +1,23 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hello_world/screens/chars/widgets/char_data.dart';
+import 'package:hello_world/screens/home/widgets/char_card.dart';
 
 var getData = CharData.getData;
-var _shownImage = "assets/images/first.gif";
+int selectedIndex = 0;
 
-class CharsList extends StatelessWidget {
+class CharList extends StatefulWidget {
+  const CharList({Key? key}) : super(key: key);
+
+  @override
+  _CharListState createState() => _CharListState();
+
+  static int getState() {
+    return selectedIndex;
+  }
+}
+
+class _CharListState extends State<CharList> {
   @override
   Widget build(BuildContext context) {
     const title = ' Char List';
@@ -18,17 +30,16 @@ class CharsList extends StatelessWidget {
       children: List.generate(6, (index) {
         return Container(
             margin: const EdgeInsets.only(top: 10.0),
-            height: 200,
+            height: 230,
             child: Card(
                 semanticContainer: true,
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 child: InkWell(
                     splashColor: Colors.green.withAlpha(30),
                     onTap: () {
-                      // ignore: unrelated_type_equality_checks
-                      if (index == getData[index]) {
-                        _setImage('${getData[index]['file']}');
-                      }
+                      setState(() {
+                        selectedIndex = index;
+                      });
                     },
                     child: Column(
                       children: [
@@ -46,14 +57,4 @@ class CharsList extends StatelessWidget {
       }),
     ));
   }
-
-  void _setImage(String image) {
-    _shownImage = image;
-  }
-
-  String getImage() {
-    return _shownImage;
-  }
-
-  returnID() {}
 }

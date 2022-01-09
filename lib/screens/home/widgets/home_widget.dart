@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/screens/chars/chars.dart';
 
 import 'bluetooth_card.dart';
 import 'char_card.dart';
@@ -12,8 +13,10 @@ class Home extends StatelessWidget {
     return Container(
       child: Column(
         children: <Widget>[
-          CharacterShown(),
-          const BluetoothCard(),
+          CharacterShown(
+             intSlectedIndex: CharList.getState(),
+          ),
+          const BluetoothWidget(),
           SportsWidget(),
         ],
       ),

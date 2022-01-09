@@ -3,9 +3,14 @@ import 'dart:async';
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 
-class BluetoothCard extends StatelessWidget {
-  const BluetoothCard({Key? key}) : super(key: key);
+class BluetoothWidget extends StatefulWidget {
+  const BluetoothWidget({Key? key}) : super(key: key);
 
+  @override
+  _BluetoothWidgetState createState() => _BluetoothWidgetState();
+}
+
+class _BluetoothWidgetState extends State<BluetoothWidget> {
   @override
   Widget build(BuildContext context) {
     return Center(

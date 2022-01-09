@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const Home(),
-    CharsList(),
+    CharList(),
     SportsList(),
   ];
 

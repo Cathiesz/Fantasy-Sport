@@ -6,24 +6,27 @@ import 'dart:math';
 
 final _random = new Random();
 
-class CharacterShown extends StatelessWidget {
-  CharsList char = CharsList();
-  final ValueNotifier<String> _img = ValueNotifier("assets/images/second.gif");
-  var tooltipmessage = TooltipMessages.getData;
+class CharacterShown extends StatefulWidget {
+  final int intSlectedIndex;
 
-  CharacterShown({Key? key}) : super(key: key);
+  CharacterShown({
+    Key? key,
+    required this.intSlectedIndex,
+  }) : super(key: key);
+  final tooltipmessage = TooltipMessages.getData;
 
   @override
+  _CharacterShownState createState() => _CharacterShownState();
+}
+
+class _CharacterShownState extends State<CharacterShown> {
+  @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<String>(
-        valueListenable: _img,
-        builder: (context, value, child) {
-          return Center(
-            child: MyTooltip(
-                message:
-                    '${tooltipmessage[1 + _random.nextInt(5 - 1)]['text']}',
-                child: Image.asset("assets/images/first.gif")),
-          );
-        });
+    return Center(
+      child: MyTooltip(
+          message:
+              '${widget.tooltipmessage[1 + _random.nextInt(5 - 1)]['text']}',
+          child: Image.asset('${getData[widget.intSlectedIndex]['file']}')),
+    );
   }
 }
