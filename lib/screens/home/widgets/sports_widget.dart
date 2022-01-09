@@ -92,7 +92,7 @@ class _SportsWidgetState extends State<SportsWidget> {
                             color: Colors.lightGreen)),
                     TextSpan(text: "\n\n Your best score was: "),
                     TextSpan(
-                        text: "${bluetooth.getRecord().toString()} \n\n",
+                        text: "${getData[widget.intSlectedIndex]['record-number']} \n\n",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.lightGreen))
@@ -130,7 +130,8 @@ class _SportsWidgetState extends State<SportsWidget> {
                             color: Colors.lightGreen)),
                     TextSpan(text: "\n\n Your best score was: "),
                     TextSpan(
-                        text: "${bluetooth.getRecord().toString()} \n\n",
+                        text:
+                            "${getData[widget.intSlectedIndex]['record-number']} \n\n",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.lightGreen))

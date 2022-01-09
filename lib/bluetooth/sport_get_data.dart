@@ -6,27 +6,25 @@ class Bluetooth {
   var thisWeek = 0;
   var record = 0;
 
-  incrementToday() async {
+  incrementToday(String sport) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     if (1 == 0) {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      today = (prefs.getInt('counter') ?? 0) + 1;
-      await prefs.setInt('counter', today);
+      today = (prefs.getInt('today-' + sport) ?? 0) + 1;
+      await prefs.setInt('today-' + sport, today);
     } else {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
       var week = 0;
-      await prefs.setInt('counter', week);
+      await prefs.setInt('today-' + sport, week);
     }
   }
 
-  incrementWeek() async {
+  incrementWeek(String sport) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     if (1 == 0) {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      thisWeek = (prefs.getInt('counter') ?? 0) + 1;
-      await prefs.setInt('counter', thisWeek);
+      thisWeek = (prefs.getInt('week-' + sport) ?? 0) + 1;
+      await prefs.setInt('week-' + sport, thisWeek);
     } else {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
       var week = 0;
-      await prefs.setInt('counter', week);
+      await prefs.setInt('week-' + sport, week);
     }
   }
 
@@ -46,7 +44,7 @@ class Bluetooth {
     return thisWeek;
   }
 
-  getRecord() {
+  getRecord(String s) {
     if (today >= record) {
       record = today;
     }

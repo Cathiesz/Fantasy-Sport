@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hello_world/screens/chars/widgets/char_data.dart';
 import 'package:hello_world/screens/home/widgets/char_card.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 var getData = CharData.getData;
 int selectedIndex = 0;
@@ -18,6 +19,12 @@ class CharList extends StatefulWidget {
 }
 
 class _CharListState extends State<CharList> {
+  @override
+  void initState() {
+    super.initState();
+    _loadIndex();
+  }
+
   @override
   Widget build(BuildContext context) {
     const title = ' Char List';
@@ -37,9 +44,7 @@ class _CharListState extends State<CharList> {
                 child: InkWell(
                     splashColor: Colors.green.withAlpha(30),
                     onTap: () {
-                      setState(() {
-                        selectedIndex = index;
-                      });
+                      _changeIndex(index);
                     },
                     child: Column(
                       children: [
@@ -56,5 +61,21 @@ class _CharListState extends State<CharList> {
                     ))));
       }),
     ));
+  }
+
+  void _changeIndex(int index) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    setState(() {
+      selectedIndex = index;
+      prefs.setInt("shownChar", index);
+    });
+  }
+
+  void _loadIndex() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      selectedIndex = (prefs.getInt('shownChar') ?? 0);
+    });
   }
 }
