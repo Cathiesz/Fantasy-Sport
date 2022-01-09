@@ -8,7 +8,12 @@ Bluetooth bluetooth = Bluetooth();
 var getData = CharData.getData;
 
 class SportsWidget extends StatefulWidget {
-  const SportsWidget({Key? key}) : super(key: key);
+  final int intSlectedIndex;
+
+  SportsWidget({
+    Key? key,
+    required this.intSlectedIndex,
+  }) : super(key: key);
 
   @override
   _SportsWidgetState createState() => _SportsWidgetState();
@@ -70,15 +75,14 @@ class _SportsWidgetState extends State<SportsWidget> {
             },
             child: ListTile(
               title: Text(
-                '${getData[1]['challenge-title']}',
+                'Current Heartbeat',
                 style: TextStyle(
                   color: Colors.lightGreen,
                 ),
               ),
               subtitle: RichText(
                 text: TextSpan(
-                  text:
-                      "\n\nCongratulations! You have accepted ${getData[1]['name']}'s challenge! \nGood luck beating it! \n\n Your Record today is:",
+                  text: "\n  Your heartbeat currently is:",
                   style: DefaultTextStyle.of(context).style,
                   children: <TextSpan>[
                     TextSpan(
@@ -88,7 +92,45 @@ class _SportsWidgetState extends State<SportsWidget> {
                             color: Colors.lightGreen)),
                     TextSpan(text: "\n\n Your best score was: "),
                     TextSpan(
-                        text: bluetooth.getRecord().toString(),
+                        text: "${bluetooth.getRecord().toString()} \n\n",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.lightGreen))
+                  ],
+                ),
+              ),
+            ),
+          )
+        ]),
+      ),
+      Card(
+        child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+          InkWell(
+            splashColor: Colors.green.withAlpha(30),
+            onTap: () {
+              _navigateToNextScreen(context);
+            },
+            child: ListTile(
+              title: Text(
+                '${getData[widget.intSlectedIndex]['challenge-title']}',
+                style: TextStyle(
+                  color: Colors.lightGreen,
+                ),
+              ),
+              subtitle: RichText(
+                text: TextSpan(
+                  text:
+                      "\nCongratulations! You have accepted ${getData[widget.intSlectedIndex]['name']}'s challenge! \nGood luck beating it! \n\n Your Record today is:",
+                  style: DefaultTextStyle.of(context).style,
+                  children: <TextSpan>[
+                    TextSpan(
+                        text: bluetooth.getSpins(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.lightGreen)),
+                    TextSpan(text: "\n\n Your best score was: "),
+                    TextSpan(
+                        text: "${bluetooth.getRecord().toString()} \n\n",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.lightGreen))

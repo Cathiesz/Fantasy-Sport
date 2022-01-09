@@ -14,10 +14,12 @@ class Home extends StatelessWidget {
       child: Column(
         children: <Widget>[
           CharacterShown(
-             intSlectedIndex: CharList.getState(),
+            intSlectedIndex: CharList.getState(),
           ),
           const BluetoothWidget(),
-          SportsWidget(),
+          SportsWidget(
+            intSlectedIndex: CharList.getState(),
+          ),
         ],
       ),
     );
