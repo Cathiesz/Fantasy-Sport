@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_world/bluetooth/sport_get_data.dart';
+import 'package:hello_world/bluetooth/bluetooth-example.dart';
 import 'package:hello_world/screens/chars/widgets/char_data.dart';
 import 'package:hello_world/screens/informations/info_screen.dart';
 
-Bluetooth bluetooth = Bluetooth();
 var getData = CharData.getData;
+BluetoothInfo bluetooth = new BluetoothInfo(
+  intSlectedIndex: 1,
+);
 
 class SportsWidget extends StatefulWidget {
   final int intSlectedIndex;
@@ -36,7 +38,7 @@ class _SportsWidgetState extends State<SportsWidget> {
                     title: const Text('Highest Temperature Today',
                         style:
                             TextStyle(color: Colors.lightGreen, fontSize: 14)),
-                    subtitle: Text(bluetooth.getHighestTemp()),
+                    subtitle: Text(" °C"),
                   ),
                 ),
                 SizedBox(width: 8),
@@ -57,7 +59,7 @@ class _SportsWidgetState extends State<SportsWidget> {
                       'Lowest Temperature today',
                       style: TextStyle(color: Colors.lightGreen, fontSize: 14),
                     ),
-                    subtitle: Text(bluetooth.getLowestTemp()),
+                    subtitle: Text(" °C"),
                   ),
                 ),
                 SizedBox(width: 8),
@@ -82,7 +84,8 @@ class _SportsWidgetState extends State<SportsWidget> {
               ),
               subtitle: RichText(
                 text: TextSpan(
-                  text: "\n  Your heartbeat currently is:",
+                  text:
+                      "\n  Your heartbeat currently is: ${bluetooth.getHeartrate()}",
                   style: DefaultTextStyle.of(context).style,
                   children: <TextSpan>[
                     TextSpan(
@@ -92,7 +95,8 @@ class _SportsWidgetState extends State<SportsWidget> {
                             color: Colors.lightGreen)),
                     TextSpan(text: "\n\n Your best score was: "),
                     TextSpan(
-                        text: "${getData[widget.intSlectedIndex]['record-number']} \n\n",
+                        text:
+                            "${getData[widget.intSlectedIndex]['record-number']} \n\n",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.lightGreen))

@@ -1,30 +1,38 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'dart:typed_data';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+import 'package:hello_world/screens/chars/widgets/char_data.dart';
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
+var getData = CharData.getData;
 
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
+class BluetoothInfo extends StatefulWidget {
+  var intSlectedIndex;
 
-  final String title;
+  BluetoothInfo({
+    Key? key,
+    required this.intSlectedIndex,
+  }) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  _BluetoothInfoState createState() => _BluetoothInfoState();
+
+  getConnectionStatus() {}
+
+  void getConnection() {}
+
+  getSpins() {}
+
+  getHeartrate() {}
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  String _connectionStatus = "Disconnected";
+class _BluetoothInfoState extends State<BluetoothInfo> {
   String _heartRate = "- bpm";
-  String _bodyTemperature = '- °C';
+  double _bodyTemperature = 0;
+  double _highestTemperature = 37;
+  double _lowestTemperature = 37;
 
   String _accX = "-";
   String _accY = "-";
@@ -37,6 +45,27 @@ class _MyHomePageState extends State<MyHomePage> {
   bool _isConnected = false;
 
   bool earConnectFound = false;
+  String _connectionStatus = "Disconnected";
+
+  double getHighestTemp() {
+    return _highestTemperature;
+  }
+
+  double getLowestTemp() {
+    return _lowestTemperature;
+  }
+
+  getSpins() {}
+
+  getRecord(String s) {}
+
+  getCurrentTemperature() {
+    return _bodyTemperature;
+  }
+
+  getHeartrate() {
+    return _heartRate;
+  }
 
   void updateHeartRate(rawData) {
     Uint8List bytes = Uint8List.fromList(rawData);
@@ -70,8 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
 
     setState(() {
-      _bodyTemperature =
-          temperature.toString() + " °C"; // todo update body temp
+      _bodyTemperature = temperature; // todo update body temp
     });
   }
 
@@ -219,7 +247,125 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return Column(children: <Widget>[
+      Card(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Expanded(
+                  child: ListTile(
+                    leading: Icon(CupertinoIcons.flame),
+                    title: const Text('Highest Temperature Today',
+                        style:
+                            TextStyle(color: Colors.lightGreen, fontSize: 14)),
+                    subtitle: Text("${getHighestTemp()} °C"),
+                  ),
+                ),
+                SizedBox(width: 8),
+                const SizedBox(
+                  height: 25,
+                  child: VerticalDivider(
+                    color: Colors.blueGrey,
+                    thickness: 1,
+                    indent: 2,
+                    endIndent: 0,
+                    width: 20,
+                  ),
+                ),
+                Expanded(
+                  child: ListTile(
+                    leading: Icon(CupertinoIcons.snow),
+                    title: const Text(
+                      'Lowest Temperature today',
+                      style: TextStyle(color: Colors.lightGreen, fontSize: 14),
+                    ),
+                    subtitle: Text("${getLowestTemp()} °C"),
+                  ),
+                ),
+                SizedBox(width: 8),
+              ],
+            ),
+          ],
+        ),
+      ),
+      Card(
+        child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+          InkWell(
+            splashColor: Colors.green.withAlpha(30),
+            onTap: () {
+             
+            },
+            child: ListTile(
+              title: Text(
+                'Current Heartbeat',
+                style: TextStyle(
+                  color: Colors.lightGreen,
+                ),
+              ),
+              subtitle: RichText(
+                text: TextSpan(
+                  text:
+                      "\n  Your heartbeat currently is: ${getHeartrate()}",
+                  style: DefaultTextStyle.of(context).style,
+                  children: <TextSpan>[
+                    TextSpan(
+                        text: getSpins(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.lightGreen)),
+                    TextSpan(text: "\n\n Your best score was: "),
+                    TextSpan(
+                        text:
+                            "${getData[widget.intSlectedIndex]['record-number']} \n\n",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.lightGreen))
+                  ],
+                ),
+              ),
+            ),
+          )
+        ]),
+      ),
+      Card(
+        child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+          InkWell(
+            splashColor: Colors.green.withAlpha(30),
+            child: ListTile(
+              title: Text(
+                '${getData[widget.intSlectedIndex]['challenge-title']}',
+                style: TextStyle(
+                  color: Colors.lightGreen,
+                ),
+              ),
+              subtitle: RichText(
+                text: TextSpan(
+                  text:
+                      "\nCongratulations! You have accepted ${getData[widget.intSlectedIndex]['name']}'s challenge! \nGood luck beating it! \n\n Your Record today is:",
+                  style: DefaultTextStyle.of(context).style,
+                  children: <TextSpan>[
+                    TextSpan(
+                        text: getSpins(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.lightGreen)),
+                    TextSpan(text: "\n\n Your best score was: "),
+                    TextSpan(
+                        text:
+                            "${getData[widget.intSlectedIndex]['record-number']} \n\n",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.lightGreen))
+                  ],
+                ),
+              ),
+            ),
+          )
+        ]),
+      )
+    ]);
   }
 }

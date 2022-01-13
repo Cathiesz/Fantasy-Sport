@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hello_world/bluetooth/bluetooth-example.dart';
 
 import '../chars/chars.dart';
 import '../sports/sports.dart';
@@ -22,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
     const Home(),
     CharList(),
     SportsList(),
+    //Bluetooth(),
   ];
 
   void _onItemTapped(int index) {
@@ -33,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: const Text('Sport with Buddies'),
       ),

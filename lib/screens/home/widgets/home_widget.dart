@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/bluetooth/bluetooth-example.dart';
 import 'package:hello_world/screens/chars/chars.dart';
 
 import 'bluetooth_card.dart';
@@ -10,18 +11,20 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          CharacterShown(
-            intSlectedIndex: CharList.getState(),
+    return SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Container(
+          child: Column(
+            children: <Widget>[
+              CharacterShown(
+                intSlectedIndex: CharList.getState(),
+              ),
+              const BluetoothWidget(),
+              BluetoothInfo(
+                intSlectedIndex: CharList.getState(),
+              ),
+            ],
           ),
-          const BluetoothWidget(),
-          SportsWidget(
-            intSlectedIndex: CharList.getState(),
-          ),
-        ],
-      ),
-    );
+        ));
   }
 }

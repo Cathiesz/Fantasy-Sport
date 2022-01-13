@@ -11,7 +11,6 @@ class CharData {
           "After years at the sea Matrosky spends his time keeping his body fit. Join him an further wet adventures.",
       "challenge-title": "Get your body to sweat!",
       "int-to-beat": 37,
-      "record-number": bluetooth.getRecord("name").toString(),
     },
     {
       "id": 2,
@@ -22,7 +21,6 @@ class CharData {
           "Rüdiger likes to spend his time reading literature and spinning in cirles. A true connoisseur of the fine art.",
       "challenge-title": "Spin atleast 10 times!",
       "int-to-beat": 10,
-      "record-number": bluetooth.getRecord("name").toString(),
     },
     {
       "id": 3,
@@ -32,7 +30,6 @@ class CharData {
       "story": "Biep bub Bieep",
       "challenge-title": "Listen to your heartbeat for at least a minute!",
       "int-to-beat": 1.00,
-      "record-number": bluetooth.getRecord("name").toString(),
     },
     {
       "id": 4,
@@ -43,7 +40,6 @@ class CharData {
           "Since Oink was just a little piglet he and his brothers have been spinning against each other. Can you spin faster than they can?",
       "challenge-title": "Spin 40 times in a minute!",
       "int-to-beat": 40,
-      "record-number": bluetooth.getRecord("name").toString(),
     },
     {
       "id": 5,
@@ -54,7 +50,6 @@ class CharData {
           "Sweet little Ursula might seem shy but she can do the best pushups in the whole city!",
       "challenge-title": "Do 10 pushups!",
       "int-to-beat": 10,
-      "record-number": bluetooth.getRecord("name").toString(),
     },
     {
       "id": 6,
@@ -65,7 +60,6 @@ class CharData {
           "Already met Zack? Talk around the town is that he can do 100 squats in a minute. Want to try it too?",
       "challenge-title": "Spin 100 times in a minute!",
       "int-to-beat": 100,
-      "record-number": bluetooth.getRecord("name").toString(),
     },
   ];
 }
