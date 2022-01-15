@@ -1,15 +1,20 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:hello_world/bluetooth/sport-math.dart';
 import 'dart:typed_data';
 
 import 'package:hello_world/screens/chars/widgets/char_data.dart';
 
 var getData = CharData.getData;
+SportMath math = SportMath();
 
 class BluetoothInfo extends StatefulWidget {
   var intSlectedIndex;
+  _BluetoothInfoState state = new _BluetoothInfoState();
 
   BluetoothInfo({
     Key? key,
@@ -19,7 +24,9 @@ class BluetoothInfo extends StatefulWidget {
   @override
   _BluetoothInfoState createState() => _BluetoothInfoState();
 
-  getConnectionStatus() {}
+  getConnectionStatus() {
+    return state._connectionStatus;
+  }
 
   void getConnection() {}
 
@@ -32,7 +39,9 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
   String _heartRate = "- bpm";
   double _bodyTemperature = 0;
   double _highestTemperature = 37;
-  double _lowestTemperature = 37;
+  double _lowestTemperature = 33;
+  int _todaySquat = 0;
+  int _todayPushup = 0;
 
   String _accX = "-";
   String _accY = "-";
@@ -43,7 +52,7 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
   String _ppgAmbient = "-";
 
   bool _isConnected = false;
-
+  bool _didSport = false;
   bool earConnectFound = false;
   String _connectionStatus = "Disconnected";
 
@@ -57,7 +66,15 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
 
   getSpins() {}
 
-  getRecord(String s) {}
+  setRecord(String sportType, int record) {
+    if (getData[widget.intSlectedIndex]['sport-type'] == sportType) {
+      getData[widget.intSlectedIndex]['record-number'] = record;
+    }
+  }
+
+  getRecord() {
+    return getData[widget.intSlectedIndex]['record-number'];
+  }
 
   getCurrentTemperature() {
     return _bodyTemperature;
@@ -99,7 +116,10 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
     }
 
     setState(() {
-      _bodyTemperature = temperature; // todo update body temp
+      _bodyTemperature = temperature;
+      if (_bodyTemperature > _highestTemperature) {
+        _highestTemperature = temperature; // todo update body temp
+      } // todo update body temp
     });
   }
 
@@ -142,6 +162,7 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
     int acc_z = bytes[18];
 
     setState(() {
+      
       _accX = acc_x.toString() + " (unknown unit)";
       _accY = acc_y.toString() + " (unknown unit)";
       _accZ = acc_z.toString() + " (unknown unit)";
@@ -295,9 +316,7 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
         child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
           InkWell(
             splashColor: Colors.green.withAlpha(30),
-            onTap: () {
-             
-            },
+            onTap: () {},
             child: ListTile(
               title: Text(
                 'Current Heartbeat',
@@ -307,8 +326,7 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
               ),
               subtitle: RichText(
                 text: TextSpan(
-                  text:
-                      "\n  Your heartbeat currently is: ${getHeartrate()}",
+                  text: "\n  Your heartbeat currently is: ${getHeartrate()}",
                   style: DefaultTextStyle.of(context).style,
                   children: <TextSpan>[
                     TextSpan(

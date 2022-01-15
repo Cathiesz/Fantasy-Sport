@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hello_world/bluetooth/bluetooth-example.dart';
+import 'package:hello_world/bluetooth/bluetooth.dart';
 
 import '../chars/chars.dart';
 import '../sports/sports.dart';
@@ -22,8 +23,8 @@ class _HomeScreenState extends State<HomeScreen> {
   static final List<Widget> _widgetOptions = <Widget>[
     const Home(),
     CharList(),
-    SportsList(),
-    //Bluetooth(),
+    //SportsList(),
+    MyHomePage(title: "r"),
   ];
 
   void _onItemTapped(int index) {
