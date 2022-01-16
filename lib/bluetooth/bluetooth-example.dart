@@ -10,7 +10,8 @@ import 'dart:typed_data';
 import 'package:hello_world/screens/chars/widgets/char_data.dart';
 
 var getData = CharData.getData;
-SportMath math = SportMath();
+SportMath mathSquat = SportMath(0, 0, false, "Squat");
+SportMath mathPushup = SportMath(0, 0, false, "Pushup");
 
 class BluetoothInfo extends StatefulWidget {
   var intSlectedIndex;
@@ -52,7 +53,6 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
   String _ppgAmbient = "-";
 
   bool _isConnected = false;
-  bool _didSport = false;
   bool earConnectFound = false;
   String _connectionStatus = "Disconnected";
 
@@ -162,7 +162,6 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
     int acc_z = bytes[18];
 
     setState(() {
-      
       _accX = acc_x.toString() + " (unknown unit)";
       _accY = acc_y.toString() + " (unknown unit)";
       _accZ = acc_z.toString() + " (unknown unit)";

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Bluetooth {
+class Increment {
   var today = 0;
   var thisWeek = 0;
   var record = 0;

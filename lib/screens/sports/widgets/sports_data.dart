@@ -1,9 +1,9 @@
 // ignore: file_names
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../../bluetooth/sport_get_data.dart';
+import 'package:hello_world/bluetooth/sport_get_data.dart';
 
-Bluetooth sport = new Bluetooth();
+Increment sport = Increment();
 
 class SportData {
   static final getData = [
@@ -30,7 +30,7 @@ class SportData {
     {
       'name': 'Pushups',
       'index': '3',
-      'symbol': 'Push Bitch',
+      'symbol': 'Push your Limit up',
       'icon': Icon(Icons.speed_outlined),
       'iconColor': Colors.orange,
       'Record': sport.getRecord("Pushup"),
