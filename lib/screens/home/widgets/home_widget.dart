@@ -19,7 +19,7 @@ class Home extends StatelessWidget {
               CharacterShown(
                 intSlectedIndex: CharList.getState(),
               ),
-              const BluetoothWidget(),
+              //const BluetoothWidget(),
               BluetoothInfo(
                 intSlectedIndex: CharList.getState(),
               ),

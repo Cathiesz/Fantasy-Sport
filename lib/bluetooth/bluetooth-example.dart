@@ -10,8 +10,8 @@ import 'dart:typed_data';
 import 'package:hello_world/screens/chars/widgets/char_data.dart';
 
 var getData = CharData.getData;
-SportMath mathSquat = SportMath(0, 0, false, "Squat");
-SportMath mathPushup = SportMath(0, 0, false, "Pushup");
+SportMath mathSquat = SportMath("Squat");
+SportMath mathPushup = SportMath("Pushup");
 
 class BluetoothInfo extends StatefulWidget {
   var intSlectedIndex;
@@ -31,9 +31,9 @@ class BluetoothInfo extends StatefulWidget {
 
   void getConnection() {}
 
-  getSpins() {}
-
   getHeartrate() {}
+
+  getSquats() {}
 }
 
 class _BluetoothInfoState extends State<BluetoothInfo> {
@@ -165,14 +165,16 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
       _accY = acc_y.toString() + " (unknown unit)";
       _accZ = acc_y.toString() + " (unknown unit)";
 
-      if (widget.intSlectedIndex == 0) {
-        _today = mathSquat.identifyRep(acc_z, 12.0, "Squat") as int;
+      if (widget.intSlectedIndex == 0 ||
+          widget.intSlectedIndex == 3 ||
+          widget.intSlectedIndex == 5) {
+        mathSquat.identifyRep(acc_z, 40.0, -90.0, "Squat");
+        _today = mathSquat.getToday();
         mathSquat.setRecord(_today, "Squat");
         _record = mathSquat.getRecord();
       } else {
-        _today = mathSquat.identifyRep(acc_z, 12.0, "Pushup") as int;
-        mathPushup.setRecord(_today, "Pushup");
-        _record = mathPushup.getRecord();
+        mathPushup.identifyRep(acc_y, -35.0, -50.0, "Pushup");
+        _today = mathPushup.getToday();
       }
     });
   }
@@ -376,13 +378,13 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
                       "\nCongratulations! You have accepted ${getData[widget.intSlectedIndex]['name']}'s challenge! \nGood luck beating it!\n",
                   style: DefaultTextStyle.of(context).style,
                   children: <TextSpan>[
-                    TextSpan(text: "\n\n Today: "),
+                    TextSpan(text: "\nToday: "),
                     TextSpan(
                         text: _today.toString() + "\n\n",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.lightGreen)),
-                    TextSpan(text: "\n\n Your best score was: "),
+                    TextSpan(text: "\nYour best score was: "),
                     TextSpan(
                         text: "${_record} \n\n",
                         style: TextStyle(

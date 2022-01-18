@@ -89,7 +89,7 @@ class _SportsWidgetState extends State<SportsWidget> {
                   style: DefaultTextStyle.of(context).style,
                   children: <TextSpan>[
                     TextSpan(
-                        text: bluetooth.getSpins(),
+                        text: bluetooth.getSquats(),
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.lightGreen)),
@@ -128,7 +128,7 @@ class _SportsWidgetState extends State<SportsWidget> {
                   style: DefaultTextStyle.of(context).style,
                   children: <TextSpan>[
                     TextSpan(
-                        text: bluetooth.getSpins(),
+                        text: bluetooth.getSquats(),
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.lightGreen)),

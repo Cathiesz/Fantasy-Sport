@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hello_world/bluetooth/sport-math.dart';
 
-SportMath sportSquat = SportMath(0, 0, false, "Squat");
-SportMath sportPushup = SportMath(0, 0, false, "Pushup");
+SportMath sportSquat = SportMath("Squat");
+SportMath sportPushup = SportMath("Pushup");
 
 class SportData {
   static final getData = [
