@@ -1,6 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SportMath {
+  late SharedPreferences prefs;
   bool segmentStarted = false;
   String sport = "";
   int today = 0;
@@ -10,39 +11,51 @@ class SportMath {
     this.segmentStarted = segmentStarted;
     this.sport = sport;
     this.today = today;
-    this.record = today;
+    this.prefs = SharedPreferences.getInstance() as SharedPreferences;
   }
 
-  getRep(int today, int record, var sportType) {
-    if (today >= record) {
-      //setRecord(sportType, today);
+  getToday() {
+    return today;
+  }
+
+  getRecord() {
+    return record;
+  }
+
+  setRecord(int today, var sport) async {
+    prefs = await SharedPreferences.getInstance();
+    if (today > (prefs.getInt("record" + sport) ?? today)) {
+      prefs.setInt("record" + sport, today);
+      record = today;
     }
   }
 
-  incrementToday() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (DateTime.now().day.toString() == prefs.getString("today")) {
+  Future<int> incrementToday(int accZ) async {
+    prefs = await SharedPreferences.getInstance();
+    if (DateTime.now().day.toString() == (prefs.getString("today") ?? "")) {
       today = (prefs.getInt('today-' + sport) ?? 0) + 1;
       await prefs.setInt('today-' + sport, today);
     } else {
       prefs.setString("today", DateTime.now().day.toString());
-      await prefs.setInt('today-' + sport, 1);
+      await prefs.setInt('today-' + sport, today++);
     }
+    return today + 1;
   }
 
-  identifyRep(int z_acc) async {
-    double _upwardTreshold = 12.0;
-
-    if (z_acc >= _upwardTreshold) {
+  Future<int> identifyRep(int zAcc, double upwardTreshold, String sport) async {
+    if (zAcc >= upwardTreshold) {
       if (!segmentStarted) {
         segmentStarted = true;
       }
-    }
-    if (z_acc < _upwardTreshold) {
+    } else if (zAcc < upwardTreshold) {
       if (segmentStarted) {
-        incrementToday();
         segmentStarted = false;
+        setRecord(today, sport);
+        return incrementToday(zAcc);
       }
     }
+    return today;
   }
+
+  getThisWeek() {}
 }

@@ -39,10 +39,10 @@ class BluetoothInfo extends StatefulWidget {
 class _BluetoothInfoState extends State<BluetoothInfo> {
   String _heartRate = "- bpm";
   double _bodyTemperature = 0;
-  double _highestTemperature = 37;
-  double _lowestTemperature = 33;
-  int _todaySquat = 0;
-  int _todayPushup = 0;
+  double _highestTemperature = 37.0;
+  double _lowestTemperature = 37.0;
+  int _record = 0;
+  int _today = 0;
 
   String _accX = "-";
   String _accY = "-";
@@ -70,10 +70,6 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
     if (getData[widget.intSlectedIndex]['sport-type'] == sportType) {
       getData[widget.intSlectedIndex]['record-number'] = record;
     }
-  }
-
-  getRecord() {
-    return getData[widget.intSlectedIndex]['record-number'];
   }
 
   getCurrentTemperature() {
@@ -118,8 +114,11 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
     setState(() {
       _bodyTemperature = temperature;
       if (_bodyTemperature > _highestTemperature) {
-        _highestTemperature = temperature; // todo update body temp
-      } // todo update body temp
+        _highestTemperature = _bodyTemperature;
+      }
+      if (_bodyTemperature <= _lowestTemperature) {
+        _lowestTemperature = _bodyTemperature;
+      }
     });
   }
 
@@ -164,7 +163,17 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
     setState(() {
       _accX = acc_x.toString() + " (unknown unit)";
       _accY = acc_y.toString() + " (unknown unit)";
-      _accZ = acc_z.toString() + " (unknown unit)";
+      _accZ = acc_y.toString() + " (unknown unit)";
+
+      if (widget.intSlectedIndex == 0) {
+        _today = mathSquat.identifyRep(acc_z, 12.0, "Squat") as int;
+        mathSquat.setRecord(_today, "Squat");
+        _record = mathSquat.getRecord();
+      } else {
+        _today = mathSquat.identifyRep(acc_z, 12.0, "Pushup") as int;
+        mathPushup.setRecord(_today, "Pushup");
+        _record = mathPushup.getRecord();
+      }
     });
   }
 
@@ -267,7 +276,18 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
 
   @override
   Widget build(BuildContext context) {
+    final ButtonStyle style =
+        ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
+
     return Column(children: <Widget>[
+      SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: 50.0,
+        child: ElevatedButton(
+          onPressed: _connect,
+          child: Text(_connectionStatus),
+        ),
+      ),
       Card(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -318,28 +338,20 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
             onTap: () {},
             child: ListTile(
               title: Text(
-                'Current Heartbeat',
+                'Current Heartbeat and Temperature',
                 style: TextStyle(
                   color: Colors.lightGreen,
                 ),
               ),
               subtitle: RichText(
                 text: TextSpan(
-                  text: "\n  Your heartbeat currently is: ${getHeartrate()}",
+                  text: "\nYour heartbeat currently is: ${getHeartrate()}",
                   style: DefaultTextStyle.of(context).style,
                   children: <TextSpan>[
                     TextSpan(
-                        text: getSpins(),
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.lightGreen)),
-                    TextSpan(text: "\n\n Your best score was: "),
-                    TextSpan(
-                        text:
-                            "${getData[widget.intSlectedIndex]['record-number']} \n\n",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.lightGreen))
+                      text:
+                          "\n\nYour current Temperature is: ${_bodyTemperature} ",
+                    ),
                   ],
                 ),
               ),
@@ -361,18 +373,18 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
               subtitle: RichText(
                 text: TextSpan(
                   text:
-                      "\nCongratulations! You have accepted ${getData[widget.intSlectedIndex]['name']}'s challenge! \nGood luck beating it! \n\n Your Record today is:",
+                      "\nCongratulations! You have accepted ${getData[widget.intSlectedIndex]['name']}'s challenge! \nGood luck beating it!\n",
                   style: DefaultTextStyle.of(context).style,
                   children: <TextSpan>[
+                    TextSpan(text: "\n\n Today: "),
                     TextSpan(
-                        text: getSpins(),
+                        text: _today.toString() + "\n\n",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.lightGreen)),
                     TextSpan(text: "\n\n Your best score was: "),
                     TextSpan(
-                        text:
-                            "${getData[widget.intSlectedIndex]['record-number']} \n\n",
+                        text: "${_record} \n\n",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.lightGreen))
@@ -380,7 +392,58 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
                 ),
               ),
             ),
-          )
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Row(children: [
+                const Text(
+                  'Status: ',
+                ),
+                Text('$_connectionStatus'),
+              ]),
+              Row(children: [
+                const Text('Heart Rate: '),
+                Text('$_heartRate'),
+              ]),
+              Row(children: [
+                const Text('Body Temperature: '),
+                Text('$_bodyTemperature'),
+              ]),
+              Row(children: [
+                const Text('Accelerometer X: '),
+                Text('$_accX'),
+              ]),
+              Row(children: [
+                const Text('Accelerometer Y: '),
+                Text('$_accY'),
+              ]),
+              Row(children: [
+                const Text('Accelerometer Z: '),
+                Text('$_accZ'),
+              ]),
+              Row(children: [
+                const Text('PPG Raw Red: '),
+                Text('$_ppgRed'),
+              ]),
+              Row(children: [
+                const Text('PPG Raw Green: '),
+                Text('$_ppgGreen'),
+              ]),
+              Row(children: [
+                const Text('PPG Ambient: '),
+                Text('$_ppgAmbient'),
+              ]),
+              Row(children: [
+                const Text(
+                    '\nNote: You have to insert the earbud in your  \n ear in order to receive heart rate values.')
+              ]),
+              Row(children: [
+                const Text(
+                    '\nNote: Accelerometer and PPG have unknown units. \n They were reverse engineered. \n Use with caution!')
+              ]),
+            ],
+          ),
         ]),
       )
     ]);

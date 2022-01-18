@@ -1,41 +1,32 @@
 // ignore: file_names
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_world/bluetooth/sport_get_data.dart';
+import 'package:hello_world/bluetooth/sport-math.dart';
 
-Increment sport = Increment();
+SportMath sportSquat = SportMath(0, 0, false, "Squat");
+SportMath sportPushup = SportMath(0, 0, false, "Pushup");
 
 class SportData {
   static final getData = [
     {
-      'name': 'Spinning',
-      'index': '1',
-      'symbol': 'How often can you spin?',
-      'icon': Icon(Icons.speed_outlined),
-      'iconColor': Colors.orange,
-      'Record': sport.getRecord("Spin"),
-      'This Week': sport.getThisWeek(),
-      'Today': sport.getToday(),
-    },
-    {
       'name': 'Squats',
-      'index': '2',
+      'index': '1',
       'symbol': 'How often can you Squat?',
       'icon': Icon(Icons.speed_outlined),
       'iconColor': Colors.orange,
-      'Record': sport.getRecord("Squat"),
-      'This Week': sport.getThisWeek(),
-      'Today': sport.getToday(),
+      'Record': sportSquat.getRecord(),
+      'This Week': sportSquat.getThisWeek(),
+      'Today': sportSquat.getToday(),
     },
     {
       'name': 'Pushups',
-      'index': '3',
+      'index': '2',
       'symbol': 'Push your Limit up',
       'icon': Icon(Icons.speed_outlined),
       'iconColor': Colors.orange,
-      'Record': sport.getRecord("Pushup"),
-      'This Week': sport.getThisWeek(),
-      'Today': sport.getToday(),
+      'Record': sportPushup.getRecord(),
+      'This Week': sportPushup.getThisWeek(),
+      'Today': sportPushup.getToday(),
     },
   ];
 }
