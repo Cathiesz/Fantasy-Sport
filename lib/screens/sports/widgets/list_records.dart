@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_world/screens/sports/widgets/item_list.dart';
+import 'package:hello_world/screens/chars/widgets/char_data.dart';
+
+var getData = CharData.getData;
 
 class ListRecords extends StatefulWidget {
-  _ListRecordsState record = _ListRecordsState();
+  _ListRecordsState recordList = _ListRecordsState();
 
   int _record = 0;
 
@@ -21,29 +23,37 @@ class ListRecords extends StatefulWidget {
     this._record = record;
     this._index = intSelected;
     this.beaten = beaten;
-    this.record.setBeaten(beaten);
+    getData[_index]["beaten"] = beaten;
   }
 }
 
 class _ListRecordsState extends State<ListRecords> {
   MaterialColor _color = Colors.red;
 
-  setBeaten(bool beaten) {
+  @override
+  void initState() {
+    super.initState();
+    setBeaten();
+  }
+
+  setBeaten() {
     setState(() {
-      getData[widget._index]["beaten"] = widget.beaten;
-      _color = widget.beaten ? Colors.lightGreen : Colors.red;
+      //getData[widget._index]["beaten"] = widget.beaten;
+      _color = getData[widget._index]["beaten"] == true
+          ? Colors.lightGreen
+          : Colors.red;
     });
   }
 
-  String getBeatenStatusText() {
-    if (widget.beaten == false) {
+  String getBeatenStatusText(int index) {
+    if (getData[index]["beaten"] == false) {
       return "Haven't beaten this buddy yet";
     }
     return "Congratulations on beating me!";
   }
 
-  String getHavent() {
-    return widget.beaten ? "have" : "haven't";
+  String getHavent(int index) {
+    return getData[index]["beaten"] == true ? "have" : "haven't";
   }
 
   @override
@@ -73,13 +83,13 @@ class _ListRecordsState extends State<ListRecords> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "${getBeatenStatusText()}\n",
+                            "${getBeatenStatusText(index)}\n",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, color: _color),
                             textAlign: TextAlign.left,
                           ),
                           Text(
-                            "You ${getHavent()} beaten ${getData[index]["name"]}'s Challenge",
+                            "You ${getHavent(index)} beaten ${getData[index]["name"]}'s Challenge",
                             textAlign: TextAlign.left,
                           ),
                           Text(

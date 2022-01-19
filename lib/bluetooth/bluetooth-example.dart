@@ -39,7 +39,7 @@ class BluetoothInfo extends StatefulWidget {
 class _BluetoothInfoState extends State<BluetoothInfo> {
   String _heartRate = "- bpm";
   double _bodyTemperature = 0;
-  double _highestTemperature = 37.0;
+  double _highestTemperature = 0.0;
   double _lowestTemperature = 37.0;
   int _record = 0;
   int _today = 0;
@@ -169,14 +169,16 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
           widget.intSlectedIndex == 3 ||
           widget.intSlectedIndex == 5) {
         mathSquat.identifyRep(
-            acc_x, 30.0, -60.0, "Squat", widget.intSlectedIndex);
+            acc_x, 40.0, -70.0, "Squat", widget.intSlectedIndex);
         _today = mathSquat.getToday();
         mathSquat.setRecord(_today, "Squat", widget.intSlectedIndex);
         _record = mathSquat.getRecord();
       } else {
         mathPushup.identifyRep(
-            acc_z, -35.0, -50.0, "Pushup", widget.intSlectedIndex);
+            acc_z, -35.0, -60.0, "Pushup", widget.intSlectedIndex);
         _today = mathPushup.getToday();
+        mathPushup.setRecord(_today, "Pushup", widget.intSlectedIndex);
+        _record = mathPushup.getRecord();
       }
     });
   }
