@@ -1,8 +1,11 @@
+import 'package:flutter/services.dart';
 import 'package:hello_world/screens/chars/widgets/char_data.dart';
 import 'package:hello_world/screens/home/widgets/sports_widget.dart';
+import 'package:hello_world/screens/sports/widgets/list_records.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 var getData = CharData.getData;
+ListRecords listRecords = ListRecords();
 
 class SportMath {
   bool segmentStarted = false;
@@ -19,22 +22,20 @@ class SportMath {
     return today;
   }
 
-  getRecord() async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setInt('record' + sport, record);
+  int getRecord() {
     return record;
   }
 
-  setRecord(int today, var sport) async {
-    final prefs = await SharedPreferences.getInstance();
-    if (this.today > record) {
+  setRecord(int today, var sport, int intSelected) async {
+    //final prefs = await SharedPreferences.getInstance();
+    if (this.today >= record) {
       record = this.today;
+      num challenge = getData[intSelected]["int-to-beat"] as int;
+      if (record > challenge) {
+        HapticFeedback.vibrate();
+        listRecords.record.getUpdate(DateTime.now().day, record, intSelected);
+      }
     }
-  }
-
-  updateRecords(int intSelected) {
-    if (getData[intSelected]["challenge-int"].toString() ==
-        record.toString()) {}
   }
 
   int incrementToday() {
@@ -42,8 +43,8 @@ class SportMath {
     return today;
   }
 
-  identifyRep(
-      int zAcc, double upwardTreshold, double downWardTreshold, String sport) {
+  identifyRep(int zAcc, double upwardTreshold, double downWardTreshold,
+      String sport, int intSelected) {
     if (zAcc >= upwardTreshold) {
       if (segmentStarted = false) {
         segmentStarted = true;
@@ -51,7 +52,7 @@ class SportMath {
     } else if (zAcc < downWardTreshold) {
       if (segmentStarted = true) {
         segmentStarted = false;
-        setRecord(today, sport);
+        setRecord(today, sport, intSelected);
         incrementToday();
       }
     }

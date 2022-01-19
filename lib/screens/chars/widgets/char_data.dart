@@ -33,7 +33,7 @@ class CharData {
       "file": "assets/images/third.gif",
       "story": "Biep bub Bieep",
       "challenge-title": "Listen to your heartbeat for at least a minute!",
-      "int-to-beat": 1.00,
+      "int-to-beat": 1,
       "record-number": 0,
       "sport-type": "heart"
     },

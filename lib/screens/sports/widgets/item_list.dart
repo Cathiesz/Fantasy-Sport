@@ -25,9 +25,8 @@ class ListItem extends StatefulWidget {
 class _ListItemState extends State<ListItem> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Card(
-            child: Row(
+    return Card(
+        child: Row(
       children: [
         Icon(
           CupertinoIcons.rosette,
@@ -40,12 +39,13 @@ class _ListItemState extends State<ListItem> {
                 style: TextStyle(
                     fontWeight: FontWeight.bold, color: Colors.lightGreen)),
             Text("You beat ${getData[widget._index]["name"]}'s Challenge"),
+            Text("Challenge: ${getData[widget._index]["challenge-title"]}"),
             Text("Time of Defeat: ${widget._time}",
                 style:
                     TextStyle(fontWeight: FontWeight.w300, color: Colors.grey)),
           ],
         ),
       ],
-    )));
+    ));
   }
 }

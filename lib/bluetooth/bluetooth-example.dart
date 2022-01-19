@@ -168,12 +168,14 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
       if (widget.intSlectedIndex == 0 ||
           widget.intSlectedIndex == 3 ||
           widget.intSlectedIndex == 5) {
-        mathSquat.identifyRep(acc_z, 40.0, -90.0, "Squat");
+        mathSquat.identifyRep(
+            acc_z, 30.0, -70.0, "Squat", widget.intSlectedIndex);
         _today = mathSquat.getToday();
-        mathSquat.setRecord(_today, "Squat");
+        mathSquat.setRecord(_today, "Squat", widget.intSlectedIndex);
         _record = mathSquat.getRecord();
       } else {
-        mathPushup.identifyRep(acc_y, -35.0, -50.0, "Pushup");
+        mathPushup.identifyRep(
+            acc_y, -35.0, -50.0, "Pushup", widget.intSlectedIndex);
         _today = mathPushup.getToday();
       }
     });
@@ -396,6 +398,60 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
                   ],
                 ),
               ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Row(children: [
+                  const Text(
+                    'Status: ',
+                  ),
+                  Text('$_connectionStatus'),
+                ]),
+                Row(children: [
+                  const Text('Heart Rate: '),
+                  Text('$_heartRate'),
+                ]),
+                Row(children: [
+                  const Text('Body Temperature: '),
+                  Text('$_bodyTemperature'),
+                ]),
+                Row(children: [
+                  const Text('Accelerometer X: '),
+                  Text('$_accX'),
+                ]),
+                Row(children: [
+                  const Text('Accelerometer Y: '),
+                  Text('$_accY'),
+                ]),
+                Row(children: [
+                  const Text('Accelerometer Z: '),
+                  Text('$_accZ'),
+                ]),
+                Row(children: [
+                  const Text('PPG Raw Red: '),
+                  Text('$_ppgRed'),
+                ]),
+                Row(children: [
+                  const Text('PPG Raw Green: '),
+                  Text('$_ppgGreen'),
+                ]),
+                Row(children: [
+                  const Text('PPG Ambient: '),
+                  Text('$_ppgAmbient'),
+                ]),
+                Row(children: [
+                  const Text(
+                      '\nNote: You have to insert the earbud in your  \n ear in order to receive heart rate values.')
+                ]),
+                Row(children: [
+                  const Text(
+                      '\nNote: Accelerometer and PPG have unknown units. \n They were reverse engineered. \n Use with caution!')
+                ]),
+              ],
             ),
           ),
         ]),

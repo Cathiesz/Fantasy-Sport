@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hello_world/screens/sports/widgets/item_list.dart';
 
 class ListRecords extends StatefulWidget {
-  const ListRecords({Key? key}) : super(key: key);
+  ListRecords({Key? key}) : super(key: key);
+
+  _ListRecordsState record = _ListRecordsState();
 
   @override
   _ListRecordsState createState() => _ListRecordsState();

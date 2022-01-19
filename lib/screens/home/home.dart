@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:hello_world/bluetooth/bluetooth-example.dart';
-import 'package:hello_world/bluetooth/bluetooth.dart';
+import 'package:hello_world/screens/sports/widgets/list_records.dart';
 
 import '../chars/chars.dart';
 import '../sports/sports.dart';
@@ -24,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
     const Home(),
     CharList(),
     //SportsList(),
-    MyHomePage(title: "r"),
+    ListRecords(),
   ];
 
   void _onItemTapped(int index) {
