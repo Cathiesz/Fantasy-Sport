@@ -15,7 +15,6 @@ class SportData {
       'icon': Icon(Icons.speed_outlined),
       'iconColor': Colors.orange,
       'Record': sportSquat.getRecord(),
-      'This Week': sportSquat.getThisWeek(),
       'Today': sportSquat.getToday(),
     },
     {
@@ -25,7 +24,6 @@ class SportData {
       'icon': Icon(Icons.speed_outlined),
       'iconColor': Colors.orange,
       'Record': sportPushup.getRecord(),
-      'This Week': sportPushup.getThisWeek(),
       'Today': sportPushup.getToday(),
     },
   ];

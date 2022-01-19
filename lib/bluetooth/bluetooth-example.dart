@@ -169,13 +169,13 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
           widget.intSlectedIndex == 3 ||
           widget.intSlectedIndex == 5) {
         mathSquat.identifyRep(
-            acc_z, 30.0, -70.0, "Squat", widget.intSlectedIndex);
+            acc_x, 30.0, -60.0, "Squat", widget.intSlectedIndex);
         _today = mathSquat.getToday();
         mathSquat.setRecord(_today, "Squat", widget.intSlectedIndex);
         _record = mathSquat.getRecord();
       } else {
         mathPushup.identifyRep(
-            acc_y, -35.0, -50.0, "Pushup", widget.intSlectedIndex);
+            acc_z, -35.0, -50.0, "Pushup", widget.intSlectedIndex);
         _today = mathPushup.getToday();
       }
     });
@@ -209,11 +209,16 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
             // listen for connection state changes
             setState(() {
               _isConnected = state == BluetoothDeviceState.connected;
-              _connectionStatus = (_isConnected) ? "Connected" : "Disconnected";
+              _connectionStatus =
+                  (_isConnected) ? r.device.name : "Disconnected";
             });
           });
 
-          await r.device.connect();
+          try {
+            await r.device.connect();
+          } catch (e) {
+            print('error caught: $e');
+          }
 
           var services = await r.device.discoverServices();
 
@@ -350,14 +355,12 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
               subtitle: RichText(
                 text: TextSpan(
                   text: "\nYour heartbeat currently is: ${getHeartrate()}",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.grey),
+                  style: TextStyle(color: Colors.grey),
                   children: <TextSpan>[
                     TextSpan(
                         text:
-                            "\n\nYour current Temperature is: ${_bodyTemperature} ",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.grey)),
+                            "\n\nYour current Temperature is: ${_bodyTemperature} \n ",
+                        style: TextStyle(color: Colors.grey)),
                   ],
                 ),
               ),
@@ -380,15 +383,12 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
                 text: TextSpan(
                   text:
                       "\nCongratulations! You have accepted ${getData[widget.intSlectedIndex]['name']}'s challenge! \nGood luck beating it!\n",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.grey),
+                  style: TextStyle(color: Colors.grey),
                   children: <TextSpan>[
                     TextSpan(text: "\nToday: "),
                     TextSpan(
-                        text: _today.toString() + "\n\n",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.lightGreen)),
+                        text: _today.toString() + "\n",
+                        style: TextStyle(color: Colors.lightGreen)),
                     TextSpan(text: "\nYour best score was: "),
                     TextSpan(
                         text: "${_record} \n\n",
@@ -398,60 +398,6 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
                   ],
                 ),
               ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Row(children: [
-                  const Text(
-                    'Status: ',
-                  ),
-                  Text('$_connectionStatus'),
-                ]),
-                Row(children: [
-                  const Text('Heart Rate: '),
-                  Text('$_heartRate'),
-                ]),
-                Row(children: [
-                  const Text('Body Temperature: '),
-                  Text('$_bodyTemperature'),
-                ]),
-                Row(children: [
-                  const Text('Accelerometer X: '),
-                  Text('$_accX'),
-                ]),
-                Row(children: [
-                  const Text('Accelerometer Y: '),
-                  Text('$_accY'),
-                ]),
-                Row(children: [
-                  const Text('Accelerometer Z: '),
-                  Text('$_accZ'),
-                ]),
-                Row(children: [
-                  const Text('PPG Raw Red: '),
-                  Text('$_ppgRed'),
-                ]),
-                Row(children: [
-                  const Text('PPG Raw Green: '),
-                  Text('$_ppgGreen'),
-                ]),
-                Row(children: [
-                  const Text('PPG Ambient: '),
-                  Text('$_ppgAmbient'),
-                ]),
-                Row(children: [
-                  const Text(
-                      '\nNote: You have to insert the earbud in your  \n ear in order to receive heart rate values.')
-                ]),
-                Row(children: [
-                  const Text(
-                      '\nNote: Accelerometer and PPG have unknown units. \n They were reverse engineered. \n Use with caution!')
-                ]),
-              ],
             ),
           ),
         ]),

@@ -1,6 +1,8 @@
 import 'package:hello_world/screens/home/widgets/sports_widget.dart';
 
 class CharData {
+
+  
   static final getData = [
     {
       "id": 1,
@@ -9,10 +11,11 @@ class CharData {
       "file": "assets/images/first.gif",
       "story":
           "After years at the sea Matrosky spends his time keeping his body fit. Join him an further wet adventures.",
-      "challenge-title": "Get your body to sweat!",
+      "challenge-title": "Find my magic number doing squats!",
       "int-to-beat": 37,
       "record-number": 0,
-      "sport-type": "squats"
+      "sport-type": "squats",
+      "beaten": false,
     },
     {
       "id": 2,
@@ -24,7 +27,8 @@ class CharData {
       "challenge-title": "Do a pushup atleast 10 times!",
       "int-to-beat": 10,
       "record-number": 0,
-      "sport-type": "pushup"
+      "sport-type": "pushup",
+      "beaten": false,
     },
     {
       "id": 3,
@@ -32,10 +36,11 @@ class CharData {
       "title": "Sailory",
       "file": "assets/images/third.gif",
       "story": "Biep bub Bieep",
-      "challenge-title": "Listen to your heartbeat for at least a minute!",
-      "int-to-beat": 1,
+      "challenge-title": "beeb boop bieb!",
+      "int-to-beat": 1000,
       "record-number": 0,
-      "sport-type": "heart"
+      "sport-type": "squat",
+      "beaten": false,
     },
     {
       "id": 4,
@@ -48,7 +53,8 @@ class CharData {
           "Squat at least 40 times to beat Oink and his brothers!",
       "int-to-beat": 40,
       "record-number": 0,
-      "sport-type": "squats"
+      "sport-type": "squats",
+      "beaten": false,
     },
     {
       "id": 5,
@@ -60,7 +66,8 @@ class CharData {
       "challenge-title": "Do 10 pushups!",
       "int-to-beat": 10,
       "record-number": 0,
-      "sport-type": "pushup"
+      "sport-type": "pushup",
+      "beaten": false,
     },
     {
       "id": 6,
@@ -69,10 +76,11 @@ class CharData {
       "file": "assets/images/sixth.gif",
       "story":
           "Already met Zack? Talk around the town is that he can do 100 squats in a minute. Want to try it too?",
-      "challenge-title": "Squat 100 times in a minute!",
-      "int-to-beat": 100,
+      "challenge-title": "Squat 100 or more?",
+      "int-to-beat": 101,
       "record-number": 0,
-      "sport-type": "squats"
+      "sport-type": "squats",
+      "beaten": false,
     },
   ];
 }

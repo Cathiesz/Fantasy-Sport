@@ -3,11 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:hello_world/screens/sports/progress/progress.dart';
 import 'sports_data.dart';
 
-class Dashboard extends StatelessWidget {
+class Dashboard extends StatefulWidget {
+  const Dashboard({ Key? key }) : super(key: key);
+
+  @override
+  _DashboardState createState() => _DashboardState();
+}
+
+
+class _DashboardState extends State<Dashboard> {
   var sportData = SportData.getData;
-
-  Dashboard({Key? key}) : super(key: key);
-
+  @override
+  void setState(VoidCallback fn) {
+    // TODO: implement setState
+    super.setState(fn);
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

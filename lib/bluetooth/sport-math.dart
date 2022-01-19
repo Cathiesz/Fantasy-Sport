@@ -28,12 +28,12 @@ class SportMath {
 
   setRecord(int today, var sport, int intSelected) async {
     //final prefs = await SharedPreferences.getInstance();
-    if (this.today >= record) {
+    if (this.today > record) {
       record = this.today;
       num challenge = getData[intSelected]["int-to-beat"] as int;
       if (record > challenge) {
         HapticFeedback.vibrate();
-        listRecords.record.getUpdate(DateTime.now().day, record, intSelected);
+        listRecords.setUpdate(DateTime.now().day, record, intSelected, true);
       }
     }
   }
