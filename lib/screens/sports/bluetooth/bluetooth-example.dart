@@ -4,18 +4,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:hello_world/bluetooth/sport-math.dart';
 import 'dart:typed_data';
 
 import 'package:hello_world/screens/chars/widgets/char_data.dart';
+import 'package:hello_world/screens/sports/bluetooth/sport-math.dart';
 
 var getData = CharData.getData;
 SportMath mathSquat = SportMath("Squat");
 SportMath mathPushup = SportMath("Pushup");
 
+// ignore: must_be_immutable
 class BluetoothInfo extends StatefulWidget {
-  var intSlectedIndex;
-  _BluetoothInfoState state = new _BluetoothInfoState();
+  var intSlectedIndex = 0;
+  _BluetoothInfoState state = _BluetoothInfoState();
 
   BluetoothInfo({
     Key? key,
@@ -249,20 +250,20 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
                     0x34,
                     0x35
                   ]);
-                  await Future.delayed(new Duration(
+                  await Future.delayed(Duration(
                       seconds:
                           2)); // short delay before next bluetooth operation otherwise BLE crashes
                   characteristic.value.listen((rawData) =>
                       {updateAccelerometer(rawData), updatePPGRaw(rawData)});
                   await characteristic.setNotifyValue(true);
-                  await Future.delayed(new Duration(seconds: 2));
+                  await Future.delayed(Duration(seconds: 2));
                   break;
 
                 case "00002a37-0000-1000-8000-00805f9b34fb":
                   characteristic.value
                       .listen((rawData) => {updateHeartRate(rawData)});
                   await characteristic.setNotifyValue(true);
-                  await Future.delayed(new Duration(
+                  await Future.delayed(Duration(
                       seconds:
                           2)); // short delay before next bluetooth operation otherwise BLE crashes
                   break;
@@ -271,7 +272,7 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
                   characteristic.value
                       .listen((rawData) => {updateBodyTemperature(rawData)});
                   await characteristic.setNotifyValue(true);
-                  await Future.delayed(new Duration(
+                  await Future.delayed(Duration(
                       seconds:
                           2)); // short delay before next bluetooth operation otherwise BLE crashes
                   break;
@@ -361,7 +362,7 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
                   children: <TextSpan>[
                     TextSpan(
                         text:
-                            "\n\nYour current Temperature is: ${_bodyTemperature} \n ",
+                            "\n\nYour current Temperature is: ${_bodyTemperature} °C\n ",
                         style: TextStyle(color: Colors.grey)),
                   ],
                 ),

@@ -1,8 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:hello_world/screens/chars/widgets/char_data.dart';
-import 'package:hello_world/screens/home/widgets/sports_widget.dart';
 import 'package:hello_world/screens/sports/widgets/list_records.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 var getData = CharData.getData;
 ListRecords listRecords = ListRecords();
@@ -14,9 +12,7 @@ class SportMath {
   int today = 0;
   int record = 0;
 
-  SportMath(String sport) {
-    this.sport = sport;
-  }
+  SportMath(this.sport);
 
   getToday() {
     return today;
@@ -32,8 +28,13 @@ class SportMath {
       record = this.today;
       num challenge = getData[intSelected]["int-to-beat"] as int;
       if (record > challenge) {
-        HapticFeedback.vibrate();
-        listRecords.setUpdate(DateTime.now().day, record, intSelected, true);
+        HapticFeedback.mediumImpact();
+        HapticFeedback.heavyImpact();
+        listRecords.setUpdate(
+            "${DateTime.now().day}.${DateTime.now().month}.${DateTime.now().year}",
+            record,
+            intSelected,
+            true);
       }
     }
   }
@@ -57,6 +58,4 @@ class SportMath {
       }
     }
   }
-
-  getThisWeek() {}
 }

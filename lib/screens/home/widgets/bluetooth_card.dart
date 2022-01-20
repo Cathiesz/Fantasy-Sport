@@ -1,10 +1,9 @@
-import 'dart:async';
 
-import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_world/bluetooth/bluetooth-example.dart';
+import 'package:hello_world/screens/sports/bluetooth/bluetooth-example.dart';
 
-BluetoothInfo bluetooth = new BluetoothInfo(
+
+BluetoothInfo bluetooth = BluetoothInfo(
   intSlectedIndex: 1,
 );
 
@@ -24,8 +23,8 @@ class _BluetoothWidgetState extends State<BluetoothWidget> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             ListTile(
-              leading: Icon(Icons.bluetooth_connected_rounded),
-              title: Text('Bluetooth Connection',
+              leading: const Icon(Icons.bluetooth_connected_rounded),
+              title: const Text('Bluetooth Connection',
                   style: TextStyle(color: Colors.lightGreen, fontSize: 14)),
               subtitle: Text(
                   'Your bluetooth device is ${bluetooth.getConnectionStatus()} \nDevice Name:'),

@@ -1,8 +1,4 @@
-import 'package:hello_world/screens/home/widgets/sports_widget.dart';
-
 class CharData {
-
-  
   static final getData = [
     {
       "id": 1,
@@ -16,6 +12,7 @@ class CharData {
       "record-number": 0,
       "sport-type": "squats",
       "beaten": false,
+      "time": "--",
     },
     {
       "id": 2,
@@ -29,6 +26,7 @@ class CharData {
       "record-number": 0,
       "sport-type": "pushup",
       "beaten": false,
+      "time": "--",
     },
     {
       "id": 3,
@@ -41,6 +39,7 @@ class CharData {
       "record-number": 0,
       "sport-type": "squat",
       "beaten": false,
+      "time": "--",
     },
     {
       "id": 4,
@@ -55,6 +54,7 @@ class CharData {
       "record-number": 0,
       "sport-type": "squats",
       "beaten": false,
+      "time": "--",
     },
     {
       "id": 5,
@@ -68,6 +68,7 @@ class CharData {
       "record-number": 0,
       "sport-type": "pushup",
       "beaten": false,
+      "time": "--",
     },
     {
       "id": 6,
@@ -81,6 +82,7 @@ class CharData {
       "record-number": 0,
       "sport-type": "squats",
       "beaten": false,
+      "time": "--",
     },
   ];
 }

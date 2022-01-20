@@ -4,7 +4,7 @@ import './tooltip_char.dart';
 import './tooltip_messages.dart';
 import 'dart:math';
 
-final _random = new Random();
+final _random = Random();
 
 class CharacterShown extends StatefulWidget {
   final int intSlectedIndex;
