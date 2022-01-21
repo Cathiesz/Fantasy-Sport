@@ -8,20 +8,14 @@ var getData = CharData.getData;
 class ListRecords extends StatefulWidget {
   _ListRecordsState recordList = _ListRecordsState();
 
-  int _index = 0;
-
-  bool beaten = false;
-
   ListRecords({Key? key}) : super(key: key);
 
   @override
   _ListRecordsState createState() => _ListRecordsState();
 
   void setUpdate(String day, int record, int intSelected, bool beaten) {
-    _index = intSelected;
-    this.beaten = beaten;
-    getData[_index]["beaten"] = beaten;
-    getData[_index]["time"] = day;
+    getData[intSelected]["beaten"] = beaten;
+    getData[intSelected]["time"] = day;
   }
 }
 
@@ -82,13 +76,11 @@ class _ListRecordsState extends State<ListRecords> {
                           "You ${getHavent(index)} beaten ${getData[index]["name"]}'s Challenge",
                           textAlign: TextAlign.left,
                         ),
-                        Text(
-                            "Challenge: ${getData[index]["challenge-title"]}"),
+                        Text("Challenge: ${getData[index]["challenge-title"]}"),
                         Text(
                           "Date of first Win: ${getData[index]["time"]}",
                           style: const TextStyle(
-                              fontWeight: FontWeight.w300,
-                              color: Colors.grey),
+                              fontWeight: FontWeight.w300, color: Colors.grey),
                           textAlign: TextAlign.left,
                         ),
                       ],

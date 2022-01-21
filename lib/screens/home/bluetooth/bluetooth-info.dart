@@ -7,7 +7,7 @@ import 'package:flutter_blue/flutter_blue.dart';
 import 'dart:typed_data';
 
 import 'package:hello_world/screens/chars/widgets/char_data.dart';
-import 'package:hello_world/screens/sports/bluetooth/sport-math.dart';
+import 'package:hello_world/screens/home/bluetooth/sport-math.dart';
 
 var getData = CharData.getData;
 SportMath mathSquat = SportMath("Squat");
@@ -25,23 +25,13 @@ class BluetoothInfo extends StatefulWidget {
 
   @override
   _BluetoothInfoState createState() => _BluetoothInfoState();
-
-  getConnectionStatus() {
-    return state._connectionStatus;
-  }
-
-  void getConnection() {}
-
-  getHeartrate() {}
-
-  getSquats() {}
 }
 
 class _BluetoothInfoState extends State<BluetoothInfo> {
   String _heartRate = "- bpm";
   double _bodyTemperature = 0;
   double _highestTemperature = 0.0;
-  double _lowestTemperature = 37.0;
+  double _lowestTemperature = 35.0;
   int _record = 0;
   int _today = 0;
 
@@ -212,8 +202,9 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
             // listen for connection state changes
             setState(() {
               _isConnected = state == BluetoothDeviceState.connected;
-              _connectionStatus =
-                  (_isConnected) ? r.device.name : "Disconnected";
+              _connectionStatus = (_isConnected)
+                  ? r.device.name + " connected "
+                  : "Bluetooth disconnected";
             });
           });
 

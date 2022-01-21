@@ -4,8 +4,6 @@ import 'package:hello_world/screens/sports/widgets/list_records.dart';
 import '../chars/chars.dart';
 import 'widgets/home_widget.dart';
 
-
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -16,11 +14,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
-
   static final List<Widget> _widgetOptions = <Widget>[
     const Home(),
     const CharList(),
-    //SportsList(),
     ListRecords(),
   ];
 
@@ -35,7 +31,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        title: const Text('Sport with Buddies'),
+        title: const Text(
+          'Sport with Buddies',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
