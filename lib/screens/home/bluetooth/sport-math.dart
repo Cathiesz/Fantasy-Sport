@@ -28,8 +28,7 @@ class SportMath {
       record = this.today;
       num challenge = getData[intSelected]["int-to-beat"] as int;
       if (record > challenge) {
-        HapticFeedback.mediumImpact();
-        HapticFeedback.heavyImpact();
+        HapticFeedback.vibrate();
         listRecords.setUpdate(
             "${DateTime.now().day}.${DateTime.now().month}.${DateTime.now().year}",
             record,
@@ -44,16 +43,16 @@ class SportMath {
     return today;
   }
 
-  identifyRep(int zAcc, double upwardTreshold, double downWardTreshold,
-      String sport, int intSelected) {
-    if (zAcc >= upwardTreshold) {
+  identifyRep(int firstAcc, double upwardTreshold1, double downWardTreshold1,
+      int secondAcc, double upwardTreshold2, double downWardTreshold2, int thirdAcc, double upwardTreshold3, double downWardTreshold3,  String s, int intSlectedIndex) {
+    if (firstAcc >= upwardTreshold1 && secondAcc >= upwardTreshold2 && thirdAcc >= upwardTreshold3) {
       if (segmentStarted = false) {
         segmentStarted = true;
       }
-    } else if (zAcc < downWardTreshold) {
+    } else if (firstAcc < downWardTreshold1 && secondAcc < downWardTreshold2 && thirdAcc < downWardTreshold3) {
       if (segmentStarted = true) {
         segmentStarted = false;
-        setRecord(today, sport, intSelected);
+        setRecord(today, sport, intSlectedIndex);
         incrementToday();
       }
     }

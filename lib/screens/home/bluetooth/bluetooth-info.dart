@@ -35,14 +35,6 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
   int _record = 0;
   int _today = 0;
 
-  String _accX = "-";
-  String _accY = "-";
-  String _accZ = "-";
-
-  String _ppgGreen = "-";
-  String _ppgRed = "-";
-  String _ppgAmbient = "-";
-
   bool _isConnected = false;
   bool earConnectFound = false;
   String _connectionStatus = "Disconnected";
@@ -135,12 +127,6 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
         bytes[10] << 16 |
         bytes[11] <<
             32; // ambient light sensor (e.g., if sensor is not placed correctly)
-
-    setState(() {
-      _ppgGreen = ppg_red.toString() + " (unknown unit)";
-      _ppgRed = ppg_green.toString() + " (unknown unit)";
-      _ppgAmbient = ppg_green_ambient.toString() + " (unknown unit)";
-    });
   }
 
   void updateAccelerometer(rawData) {
@@ -152,21 +138,17 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
     int acc_z = bytes[18];
 
     setState(() {
-      _accX = acc_x.toString() + " (unknown unit)";
-      _accY = acc_y.toString() + " (unknown unit)";
-      _accZ = acc_y.toString() + " (unknown unit)";
-
       if (widget.intSlectedIndex == 0 ||
           widget.intSlectedIndex == 3 ||
           widget.intSlectedIndex == 5) {
-        mathSquat.identifyRep(
-            acc_x, 40.0, -70.0, "Squat", widget.intSlectedIndex);
+        mathSquat.identifyRep(acc_y, 17.0, -22.0, acc_x, 20, -31, acc_z, 40, 17,
+            "Squat", widget.intSlectedIndex);
         _today = mathSquat.getToday();
         mathSquat.setRecord(_today, "Squat", widget.intSlectedIndex);
         _record = mathSquat.getRecord();
       } else {
-        mathPushup.identifyRep(
-            acc_z, -35.0, -60.0, "Pushup", widget.intSlectedIndex);
+        mathPushup.identifyRep(acc_z, 12.0, 15.0, acc_x, -13, -25, acc_y, -23,
+            -32, "Pushup", widget.intSlectedIndex);
         _today = mathPushup.getToday();
         mathPushup.setRecord(_today, "Pushup", widget.intSlectedIndex);
         _record = mathPushup.getRecord();
@@ -186,7 +168,7 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
     FlutterBlue flutterBlue = FlutterBlue.instance;
 
     // start scanning
-    flutterBlue.startScan(timeout: Duration(seconds: 4));
+    flutterBlue.startScan(timeout: const Duration(seconds: 4));
 
     // listen to scan results
     var subscription = flutterBlue.scanResults.listen((results) async {
@@ -241,20 +223,20 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
                     0x34,
                     0x35
                   ]);
-                  await Future.delayed(Duration(
+                  await Future.delayed(const Duration(
                       seconds:
                           2)); // short delay before next bluetooth operation otherwise BLE crashes
                   characteristic.value.listen((rawData) =>
                       {updateAccelerometer(rawData), updatePPGRaw(rawData)});
                   await characteristic.setNotifyValue(true);
-                  await Future.delayed(Duration(seconds: 2));
+                  await Future.delayed(const Duration(seconds: 2));
                   break;
 
                 case "00002a37-0000-1000-8000-00805f9b34fb":
                   characteristic.value
                       .listen((rawData) => {updateHeartRate(rawData)});
                   await characteristic.setNotifyValue(true);
-                  await Future.delayed(Duration(
+                  await Future.delayed(const Duration(
                       seconds:
                           2)); // short delay before next bluetooth operation otherwise BLE crashes
                   break;
@@ -263,7 +245,7 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
                   characteristic.value
                       .listen((rawData) => {updateBodyTemperature(rawData)});
                   await characteristic.setNotifyValue(true);
-                  await Future.delayed(Duration(
+                  await Future.delayed(const Duration(
                       seconds:
                           2)); // short delay before next bluetooth operation otherwise BLE crashes
                   break;
@@ -300,14 +282,14 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
               children: <Widget>[
                 Expanded(
                   child: ListTile(
-                    leading: Icon(CupertinoIcons.flame),
+                    leading: const Icon(CupertinoIcons.flame),
                     title: const Text('Highest Temperature Today',
                         style:
                             TextStyle(color: Colors.lightGreen, fontSize: 14)),
                     subtitle: Text("${getHighestTemp()} °C"),
                   ),
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 const SizedBox(
                   height: 25,
                   child: VerticalDivider(
@@ -320,7 +302,7 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
                 ),
                 Expanded(
                   child: ListTile(
-                    leading: Icon(CupertinoIcons.snow),
+                    leading: const Icon(CupertinoIcons.snow),
                     title: const Text(
                       'Lowest Temperature today',
                       style: TextStyle(color: Colors.lightGreen, fontSize: 14),
@@ -328,7 +310,7 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
                     subtitle: Text("${getLowestTemp()} °C"),
                   ),
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
               ],
             ),
           ],
@@ -340,7 +322,7 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
             splashColor: Colors.green.withAlpha(30),
             onTap: () {},
             child: ListTile(
-              title: Text(
+              title: const Text(
                 'Current Heartbeat and Temperature',
                 style: TextStyle(
                   color: Colors.lightGreen,
@@ -349,12 +331,12 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
               subtitle: RichText(
                 text: TextSpan(
                   text: "\nYour heartbeat currently is: ${getHeartrate()}",
-                  style: TextStyle(color: Colors.grey),
+                  style: const TextStyle(color: Colors.grey),
                   children: <TextSpan>[
                     TextSpan(
                         text:
                             "\n\nYour current Temperature is: ${_bodyTemperature} °C\n ",
-                        style: TextStyle(color: Colors.grey)),
+                        style: const TextStyle(color: Colors.grey)),
                   ],
                 ),
               ),
@@ -369,7 +351,7 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
             child: ListTile(
               title: Text(
                 '${getData[widget.intSlectedIndex]['challenge-title']}',
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.lightGreen,
                 ),
               ),
@@ -377,16 +359,16 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
                 text: TextSpan(
                   text:
                       "\nCongratulations! You have accepted ${getData[widget.intSlectedIndex]['name']}'s challenge! \nGood luck beating it!\n",
-                  style: TextStyle(color: Colors.grey),
+                  style: const TextStyle(color: Colors.grey),
                   children: <TextSpan>[
-                    TextSpan(text: "\nToday: "),
+                    const TextSpan(text: "\nToday: "),
                     TextSpan(
                         text: _today.toString() + "\n",
-                        style: TextStyle(color: Colors.lightGreen)),
-                    TextSpan(text: "\nYour best score was: "),
+                        style: const TextStyle(color: Colors.lightGreen)),
+                    const TextSpan(text: "\nYour best score was: "),
                     TextSpan(
                         text: "${_record} \n\n",
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.lightGreen))
                   ],

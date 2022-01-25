@@ -8,7 +8,7 @@ class CharData {
       "story":
           "After years at the sea Matrosky spends his time keeping his body fit. Join him an further wet adventures.",
       "challenge-title": "Find my magic number doing squats!",
-      "int-to-beat": 37,
+      "int-to-beat": 5,
       "record-number": 0,
       "sport-type": "squats",
       "beaten": false,
