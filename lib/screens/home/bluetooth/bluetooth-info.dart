@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'dart:typed_data';
 
@@ -105,30 +104,6 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
     });
   }
 
-  void updatePPGRaw(rawData) {
-    Uint8List bytes = Uint8List.fromList(rawData);
-
-    // corresponds to the raw reading of the PPG sensor from which the heart rate is computed
-    //
-    // example plot https://e2e.ti.com/cfs-file/__key/communityserver-discussions-components-files/73/Screen-Shot-2019_2D00_01_2D00_24-at-19.30.24.png
-    // (image just for illustration purpose, obtained from a different sensor! Sensor value range differs.)
-
-    var ppg_red = bytes[0] |
-        bytes[1] << 8 |
-        bytes[2] << 16 |
-        bytes[3] << 32; // raw green color value of PPG sensor
-    var ppg_green = bytes[4] |
-        bytes[5] << 8 |
-        bytes[6] << 16 |
-        bytes[7] << 32; // raw red color value of PPG sensor
-
-    var ppg_green_ambient = bytes[8] |
-        bytes[9] << 8 |
-        bytes[10] << 16 |
-        bytes[11] <<
-            32; // ambient light sensor (e.g., if sensor is not placed correctly)
-  }
-
   void updateAccelerometer(rawData) {
     Int8List bytes = Int8List.fromList(rawData);
 
@@ -226,8 +201,8 @@ class _BluetoothInfoState extends State<BluetoothInfo> {
                   await Future.delayed(const Duration(
                       seconds:
                           2)); // short delay before next bluetooth operation otherwise BLE crashes
-                  characteristic.value.listen((rawData) =>
-                      {updateAccelerometer(rawData), updatePPGRaw(rawData)});
+                  characteristic.value
+                      .listen((rawData) => {updateAccelerometer(rawData)});
                   await characteristic.setNotifyValue(true);
                   await Future.delayed(const Duration(seconds: 2));
                   break;
