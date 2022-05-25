@@ -2,7 +2,7 @@
 
 A Sport Challenge App written to be used with the Cosinuss° One earbuds. While doing your excercises you can compare yourself to different virtual buddies and try to beat their Highscore. Currently supported excercises include: Pushups and Squats.
 
-![Image of first page](assets/images/github/image_github.jpg "First Page")
+![Image of first page](assets/images/image_github.jpg "First Page")
 ## Quickstart
 
 This project is a starting point for a Flutter application.
